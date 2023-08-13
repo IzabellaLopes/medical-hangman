@@ -75,32 +75,49 @@ def check_guess(word, hidden_word, guess):
 # Main function
 def main():
     """
-    Main function to demonstrate selecting random words from different categories.
+    Main function to play the Hangman game with different word categories.
+    The function selects a random word from each category in the Google Sheets,
+    creates a hidden word for guessing, and allows the user to input guesses.
+    After each correct guess, the hidden word is updated and displayed until
+    the entire word is revealed.
+
+    Categories:
+        - Bones
+        - Organs
+        - Diseases or Conditions
+        - Radiology
     """
     GSPREAD_CLIENT = authorize_google_sheets()
     
     # Open the 'medical_hangman' Google Sheets 
     SHEET = GSPREAD_CLIENT.open('medical_hangman')
     
-    # Select a random word from the 'bones' category (column 1)
-    selected_bone_word = select_random_word_from_sheet(SHEET, 1) 
-    hidden_bone_word = create_hidden_word(selected_bone_word)
+    # Categories and their corresponding column numbers
+    categories = [
+        ('bones', 1),
+        ('organs', 2),
+        ('diseases or conditions', 3),
+        ('radiology', 4)
+    ]
     
-    print("Hidden bone word:", hidden_bone_word)
-    
-    while '_' in hidden_bone_word:
-        guess = take_guess()
-        hidden_bone_word, correct_guess = check_guess(selected_bone_word, hidden_bone_word, guess)
+    for category, column_number in categories:
+        selected_word = select_random_word_from_sheet(SHEET, column_number)
+        hidden_word = create_hidden_word(selected_word)
         
-        if correct_guess:
-            print("Correct guess!")
-        else:
-            print("Incorrect guess!")
+        print(f"Hidden {category} word:", hidden_word)
         
-        print("Hidden bone word:", hidden_bone_word)
-    
-    print("Congratulations, you've guessed the bone word!")
+        while '_' in hidden_word:
+            guess = take_guess()
+            hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
+            
+            if correct_guess:
+                print("Correct guess!")
+            else:
+                print("Incorrect guess!")
+            
+            print(f"Hidden {category} word:", hidden_word)
+        
+        print(f"Congratulations, you've guessed the {category} word!")
 
 if __name__ == "__main__":
     main()
-
