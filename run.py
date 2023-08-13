@@ -41,7 +41,8 @@ def create_hidden_word(word):
     """
     Creates a string of underscores to match the length of the input word.
     """
-    return ' _ ' * len(word)
+    hidden_word = ' '.join(['_' if char != ' ' else ' ' for char in word])
+    return hidden_word
 
 # Main function
 def main():
