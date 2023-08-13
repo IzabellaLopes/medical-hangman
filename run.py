@@ -44,6 +44,34 @@ def create_hidden_word(word):
     hidden_word = ' '.join(['_' if char != ' ' else ' ' for char in word])
     return hidden_word
 
+def take_guess():
+    """
+    Takes a validated guess input from the user. 
+    """
+    while True:
+        guess = input("Take a guess: ").upper()
+        
+        if len(guess) != 1 or not guess.isalpha():
+            print("Invalid guess. Please enter a single letter.")
+        else:
+            return guess
+        
+def check_guess(word, hidden_word, guess):
+    """
+    Checks if the guessed letter is in the word and updates the hidden word accordingly.
+    """
+    correct_guess = False
+    updated_hidden_word = ''
+    
+    for i in range(len(word)):
+        if word[i] == guess:
+            updated_hidden_word += guess
+            correct_guess = True
+        else:
+            updated_hidden_word += hidden_word[i]
+    
+    return updated_hidden_word, correct_guess
+
 # Main function
 def main():
     """
@@ -55,33 +83,23 @@ def main():
     SHEET = GSPREAD_CLIENT.open('medical_hangman')
     
     # Select a random word from the 'bones' category (column 1)
-    selected_bone_word = select_random_word_from_sheet(SHEET, 1)
-    print("Randomly selected bone word:", selected_bone_word)
-    
+    selected_bone_word = select_random_word_from_sheet(SHEET, 1) 
     hidden_bone_word = create_hidden_word(selected_bone_word)
+    
     print("Hidden bone word:", hidden_bone_word)
-
-    # Select a random word from the 'organs' category (column 2)
-    selected_organs_word = select_random_word_from_sheet(SHEET, 2)
-    print("Randomly selected organ word:", selected_organs_word)
     
-    hidden_organs_word = create_hidden_word(selected_organs_word)
-    print("Hidden organs word:", hidden_organs_word)
-
-    # Select a random word from the 'diseases or conditions' category (column 3)
-    selected_diseases_word = select_random_word_from_sheet(SHEET, 3)
-    print("Randomly selected disease or condition word:", selected_diseases_word)
+    while '_' in hidden_bone_word:
+        guess = take_guess()
+        hidden_bone_word, correct_guess = check_guess(selected_bone_word, hidden_bone_word, guess)
+        
+        if correct_guess:
+            print("Correct guess!")
+        else:
+            print("Incorrect guess!")
+        
+        print("Hidden bone word:", hidden_bone_word)
     
-    hidden_diseases_word = create_hidden_word(selected_diseases_word)
-    print("Hidden disease or condition word:", hidden_diseases_word)
-
-    # Select a random word from the 'radiology' category (column 4)
-    selected_radiology_word = select_random_word_from_sheet(SHEET, 4)
-    print("Randomly selected radiology word:", selected_radiology_word)
-    
-    hidden_radiology_word = create_hidden_word(selected_radiology_word)
-    print("Hidden radiology word:", hidden_radiology_word)
-
+    print("Congratulations, you've guessed the bone word!")
 
 if __name__ == "__main__":
     main()
