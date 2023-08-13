@@ -37,6 +37,12 @@ def select_random_word_from_sheet(sheet, column_number):
     random_word = random.choice(words)
     return random_word
 
+def create_hidden_word(word):
+    """
+    Creates a string of underscores to match the length of the input word.
+    """
+    return ' _ ' * len(word)
+
 # Main function
 def main():
     """
@@ -50,18 +56,31 @@ def main():
     # Select a random word from the 'bones' category (column 1)
     selected_bone_word = select_random_word_from_sheet(SHEET, 1)
     print("Randomly selected bone word:", selected_bone_word)
+    
+    hidden_bone_word = create_hidden_word(selected_bone_word)
+    print("Hidden bone word:", hidden_bone_word)
 
     # Select a random word from the 'organs' category (column 2)
     selected_organs_word = select_random_word_from_sheet(SHEET, 2)
     print("Randomly selected organ word:", selected_organs_word)
+    
+    hidden_organs_word = create_hidden_word(selected_organs_word)
+    print("Hidden organs word:", hidden_organs_word)
 
     # Select a random word from the 'diseases or conditions' category (column 3)
     selected_diseases_word = select_random_word_from_sheet(SHEET, 3)
     print("Randomly selected disease or condition word:", selected_diseases_word)
+    
+    hidden_diseases_word = create_hidden_word(selected_diseases_word)
+    print("Hidden disease or condition word:", hidden_diseases_word)
 
     # Select a random word from the 'radiology' category (column 4)
     selected_radiology_word = select_random_word_from_sheet(SHEET, 4)
     print("Randomly selected radiology word:", selected_radiology_word)
+    
+    hidden_radiology_word = create_hidden_word(selected_radiology_word)
+    print("Hidden radiology word:", hidden_radiology_word)
+
 
 if __name__ == "__main__":
     main()
