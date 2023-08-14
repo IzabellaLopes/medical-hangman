@@ -87,6 +87,9 @@ def check_guess(word, hidden_word, guess):
     """
     Checks if the guessed letter is in the word and updates the hidden word accordingly.
     """
+    if guess in hidden_word or guess in missed_letters:
+        return hidden_word, False    
+    
     correct_guess = False
     updated_hidden_word = ''
     
@@ -137,26 +140,38 @@ def start_game():
                     category_name = categories[int(category_choice) - 1][0]
                     selected_word = select_random_word_from_sheet(SHEET, int(category_choice))
                     hidden_word = create_hidden_word(selected_word)
+                    
+                    missed_letters = [] # Reset the missed letters for a new game round
 
                     print(f"Hidden {category_name} word:", hidden_word)
                     
                     attempts = 7  # Maximum number of attempts
                     while '_' in hidden_word and attempts > 0:
                         guess = take_guess()
-                        hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
-
+                        
+                        if guess in missed_letters or guess in hidden_word:
+                            print("\nYou've already guessed that letter. Try again with a different letter.\n")
+                        else:
+                            hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
+                        
                         if correct_guess:
                             print("Correct guess!")
                         else:
                             print("Incorrect guess!")
-                            attempts -= 1
-                            print(f"{attempts} attempts left.")
-
+                            # Check if the guess is not a duplicate or already revealed
+                            if guess not in missed_letters and guess not in hidden_word:
+                                missed_letters.append(guess)
+                                attempts -= 1
+                        
+                        print(f"{attempts} attempts left.")
+                        
+                        if attempts < 7:
+                            print("Missed letters:", ", ".join(missed_letters))
+                        
                         print(f"Hidden {category_name} word:", hidden_word)
-                        print("Missed letters:", ", ".join(missed_letters))
 
                     if '_' in hidden_word:
-                        print("Sorry, you've run out of attempts. The word was:", selected_word)
+                        print("\nSorry, you've run out of attempts. The word was:", selected_word)
                     else:
                         print(f"Congratulations, you've guessed the {category_name} word!")
                     break
