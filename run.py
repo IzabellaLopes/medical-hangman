@@ -3,6 +3,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import random
 import os
+import time
 
 # List of scopes needed for accessing Google Sheets and Google Drive APIs
 SCOPE = [
@@ -21,6 +22,7 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 
 # Game Variables
 missed_letters = []
+FEEDBACK_TIME = 2
 
 # Misc Functions
 def clear_terminal():
@@ -46,7 +48,14 @@ def main_menu():
     print("3) Highscores")
     
     choice = input("Select an option: ")
-    return choice
+    valid_choice = ["1", "2", "3"]
+    
+    if choice not in valid_choice:
+        print("Oh no! Invalid choice. Please try again.")
+        time.sleep(FEEDBACK_TIME)
+        main_menu()
+    else:
+        return choice
 
 # Function to select a random word from a specified column in a Google Sheets worksheet
 def select_random_word_from_sheet(sheet, column_number):
@@ -152,12 +161,14 @@ def start_game():
             clear_terminal()
             
             print(f"Welcome {name}! Let's play Medical Terms Hangman.\n")
+            time.sleep(FEEDBACK_TIME)
             
             while True:
                 print("Choose the word list you want to play:\n")
                 for idx, category in enumerate(categories, start=1):
                     print(f"{idx}) {category[0]}")
                 category_choice = input("\nSelect a category: ")
+                time.sleep(FEEDBACK_TIME)
                 
                 clear_terminal()
 
@@ -202,6 +213,7 @@ def start_game():
                         print("\nSorry, you've run out of attempts. The word was:\n", selected_word)
                     else:
                         print(f"Congratulations, you've guessed the {category_name} word!\n")
+                    time.sleep(FEEDBACK_TIME)
                     break
                 else:
                     print("Invalid category choice. Please select a valid option.\n")
@@ -210,8 +222,7 @@ def start_game():
             print("How to Play: ...")  # Add instructions
         elif choice == "3":
             print("Highscores: ...")   # Add highscores
-        else:
-            print("Invalid option. Please select a valid option.\n")
+        
         
 if __name__ == "__main__":
     start_game()
