@@ -18,6 +18,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Open the 'medical_hangman' Google Sheets
 SHEET = GSPREAD_CLIENT.open('medical_hangman')
 
+# Game Variables
+missed_letters = []
+
 # Game Menu
 def main_menu():
     """
@@ -86,6 +89,9 @@ def check_guess(word, hidden_word, guess):
             correct_guess = True
         else:
             updated_hidden_word += hidden_word[i]
+            
+    if not correct_guess and guess not in missed_letters:
+        missed_letters.append(guess)
     
     return updated_hidden_word, correct_guess
 
@@ -140,6 +146,7 @@ def start_game():
                             print(f"{attempts} attempts left.")
 
                         print(f"Hidden {category_name} word:", hidden_word)
+                        print("Missed letters:", ", ".join(missed_letters))
 
                     if '_' in hidden_word:
                         print("Sorry, you've run out of attempts. The word was:", selected_word)
