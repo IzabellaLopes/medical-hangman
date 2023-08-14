@@ -10,14 +10,13 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-def authorize_google_sheets():
-    """
-    Authorizes the Google Sheets API using service account credentials.
-    """
-    CREDS = Credentials.from_service_account_file('creds.json')
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    return GSPREAD_CLIENT
+# Authorize Google Sheets API using service account credentials
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+
+# Open the 'medical_hangman' Google Sheets
+SHEET = GSPREAD_CLIENT.open('medical_hangman')
 
 def select_random_word_from_sheet(sheet, column_number):
     """
@@ -141,9 +140,4 @@ def main():
             print("Invalid option. Please select a valid option.")
 
 if __name__ == "__main__":
-    GSPREAD_CLIENT = authorize_google_sheets()
-    
-    # Open the 'medical_hangman' Google Sheets 
-    SHEET = GSPREAD_CLIENT.open('medical_hangman')
-    
     main()
