@@ -53,7 +53,7 @@ def main_menu():
     if choice not in valid_choice:
         print("Oh no! Invalid choice. Please try again.")
         time.sleep(FEEDBACK_TIME)
-        main_menu()
+        return main_menu()
     else:
         return choice
 
@@ -164,6 +164,7 @@ def start_game():
             time.sleep(FEEDBACK_TIME)
             
             while True:
+                game_over = False
                 print("Choose the word list you want to play:\n")
                 for idx, category in enumerate(categories, start=1):
                     print(f"{idx}) {category[0]}")
@@ -209,12 +210,23 @@ def start_game():
                         print('')
                         print(f"Hidden {category_name} word:", hidden_word)
 
-                    if '_' in hidden_word:
-                        print("\nSorry, you've run out of attempts. The word was:\n", selected_word)
-                    else:
+                    # Check for game over conditions
+                    if '_' not in hidden_word:
                         print(f"Congratulations, you've guessed the {category_name} word!\n")
-                    time.sleep(FEEDBACK_TIME)
-                    break
+                        game_over = True
+                    elif attempts == 0:
+                        print("\nSorry, you've run out of attempts. The word was:", selected_word)
+                        game_over = True
+
+                    if game_over:
+                        play_again = input("Do you want to play again? (y/n): ")
+                        if play_again.lower() == "y":
+                            clear_terminal()
+                            break
+                        else:
+                            print("Thank you for playing Medical Hangman!")
+                            time.sleep(FEEDBACK_TIME)
+                            return  # Exit the game
                 else:
                     print("Invalid category choice. Please select a valid option.\n")
         
