@@ -21,6 +21,13 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 # Game Variables
 missed_letters = []
 
+# Function to print lines of underscores
+# From: https://www.youtube.com/watch?v=pFvSb7cb_Us
+def printLines(word):
+    for char in word:
+        print("\u203E", end=" ")
+    print()
+
 # Game Menu
 def main_menu():
     """
@@ -59,7 +66,7 @@ def create_hidden_word(word):
     """
     Creates a string of underscores to match the length of the input word.
     """
-    hidden_word = ' '.join([' _ ' if char != ' ' else ' ' for char in word])
+    hidden_word = ''.join(['_' if char != ' ' else ' ' for char in word])
     return hidden_word
 
 # Function to take a validated guess input from the user
