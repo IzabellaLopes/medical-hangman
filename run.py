@@ -72,52 +72,78 @@ def check_guess(word, hidden_word, guess):
     
     return updated_hidden_word, correct_guess
 
-# Main function
+# Game Menu
 def main():
     """
-    Main function to play the Hangman game with different word categories.
-    The function selects a random word from each category in the Google Sheets,
-    creates a hidden word for guessing, and allows the user to input guesses.
-    After each correct guess, the hidden word is updated and displayed until
-    the entire word is revealed.
-
+    Main function to run the Medical Hangman game with different word categories.
+    
     Categories:
         - Bones
         - Organs
         - Diseases or Conditions
         - Radiology
     """
+    print("Welcome to Medical Hangman!")
+    
+    categories = [
+        ('Bones', 1),
+        ('Organs', 2),
+        ('Diseases or Conditions', 3),
+        ('Radiology', 4)
+    ]
+
+    while True:
+        print("\nMenu:")
+        print("1) Play")
+        print("2) How to Play")
+        print("3) Highscores")
+        choice = input("Select an option: ")
+
+        if choice == "1":
+            name = input("Enter your name: ")
+            print(f"Welcome {name}! Let's play Medical Terms Hangman.")
+
+            while True:
+                print("\nChoose the word list you want to play:")
+                print("1) Bones")
+                print("2) Organs")
+                print("3) Diseases or Conditions")
+                print("4) Radiology")
+                category_choice = input("Select a category: ")
+
+                if category_choice in ["1", "2", "3", "4"]:
+                    category_name = categories[int(category_choice) - 1][0]
+                    selected_word = select_random_word_from_sheet(SHEET, int(category_choice))
+                    hidden_word = create_hidden_word(selected_word)
+
+                    print(f"Hidden {category_name} word:", hidden_word)
+
+                    while '_' in hidden_word:
+                        guess = take_guess()
+                        hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
+
+                        if correct_guess:
+                            print("Correct guess!")
+                        else:
+                            print("Incorrect guess!")
+
+                        print(f"Hidden {category_name} word:", hidden_word)
+
+                    print(f"Congratulations, you've guessed the {category_name} word!")
+                    break
+                else:
+                    print("Invalid category choice. Please select a valid option.")
+        elif choice == "2":
+            print("How to Play: ...")  # Add instructions
+        elif choice == "3":
+            print("Highscores: ...")   # Add highscores
+        else:
+            print("Invalid option. Please select a valid option.")
+
+if __name__ == "__main__":
     GSPREAD_CLIENT = authorize_google_sheets()
     
     # Open the 'medical_hangman' Google Sheets 
     SHEET = GSPREAD_CLIENT.open('medical_hangman')
     
-    # Categories and their corresponding column numbers
-    categories = [
-        ('bones', 1),
-        ('organs', 2),
-        ('diseases or conditions', 3),
-        ('radiology', 4)
-    ]
-    
-    for category, column_number in categories:
-        selected_word = select_random_word_from_sheet(SHEET, column_number)
-        hidden_word = create_hidden_word(selected_word)
-        
-        print(f"Hidden {category} word:", hidden_word)
-        
-        while '_' in hidden_word:
-            guess = take_guess()
-            hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
-            
-            if correct_guess:
-                print("Correct guess!")
-            else:
-                print("Incorrect guess!")
-            
-            print(f"Hidden {category} word:", hidden_word)
-        
-        print(f"Congratulations, you've guessed the {category} word!")
-
-if __name__ == "__main__":
     main()
