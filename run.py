@@ -2,6 +2,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import random
+import os
 
 # List of scopes needed for accessing Google Sheets and Google Drive APIs
 SCOPE = [
@@ -21,17 +22,29 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 # Game Variables
 missed_letters = []
 
+# Misc Functions
+def clear_terminal():
+    """
+    Clears the terminal.
+    """
+    # From: https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 # Game Menu
 def main_menu():
     """
     Displays the game menu and processes the user's choice.
     """
+    clear_terminal()
+    
     print("WELCOME TO MEDICAL HANGMAN!")
     
     print("\nMenu:")
     print("1) Play")
     print("2) How to Play")
     print("3) Highscores")
+    
     choice = input("Select an option: ")
     return choice
 
@@ -75,10 +88,10 @@ def take_guess():
     Takes a validated guess input from the user. 
     """
     while True:
-        guess = input("Take a guess: ").upper()
+        guess = input("\nTake a guess: ").upper()
         
         if len(guess) != 1 or not guess.isalpha():
-            print("Invalid guess. Please enter a single letter.")
+            print("\nInvalid guess. Please enter a single letter.\n")
         else:
             return guess
         
@@ -124,24 +137,29 @@ def start_game():
         - Radiology
     """   
     categories = [
-        ('Bones', 1),
-        ('Organs', 2),
-        ('Diseases or Conditions', 3),
-        ('Radiology', 4)
+        ('BONE', 1),
+        ('ORGAN', 2),
+        ('DISEASE OR CONDITION', 3),
+        ('RADIOLOGY', 4)
     ]
 
     while True:
         choice = main_menu()
 
         if choice == "1":
-            name = input("Enter your name: ")
-            print(f"Welcome {name}! Let's play Medical Terms Hangman.")
+            name = input("\nEnter your name: ")
+            
+            clear_terminal()
+            
+            print(f"Welcome {name}! Let's play Medical Terms Hangman.\n")
             
             while True:
-                print("\nChoose the word list you want to play:")
+                print("Choose the word list you want to play:\n")
                 for idx, category in enumerate(categories, start=1):
                     print(f"{idx}) {category[0]}")
-                category_choice = input("Select a category: ")
+                category_choice = input("\nSelect a category: ")
+                
+                clear_terminal()
 
                 if category_choice.isdigit() and 1 <= int(category_choice) <= len(categories):
                     category_name = categories[int(category_choice) - 1][0]
@@ -151,7 +169,7 @@ def start_game():
                     missed_letters = [] # Reset the missed letters for a new game round
 
                     word_length = calculate_word_length(selected_word)
-                    print(f"This word has {word_length} letters.")
+                    print(f"This word has {word_length} letters.\n")
                     print(f"Hidden {category_name} word:", hidden_word)
                     
                     attempts = 7  # Maximum number of attempts
@@ -164,34 +182,36 @@ def start_game():
                             hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
                         
                         if correct_guess:
-                            print("Correct guess!")
+                            print("\nCorrect guess!\n")
                         else:
-                            print("Incorrect guess!")
+                            print("\nIncorrect guess!\n")
                             # Check if the guess is not a duplicate or already revealed
                             if guess not in missed_letters and guess not in hidden_word:
                                 missed_letters.append(guess)
                                 attempts -= 1
                         
-                        print(f"{attempts} attempts left.")
+                        print(f"{attempts} attempts left.\n")
                         
                         if attempts < 7:
-                            print("Missed letters:", ", ".join(missed_letters))
+                            print("Missed letters: ", ", ".join(missed_letters))
                         
+                        print('')
                         print(f"Hidden {category_name} word:", hidden_word)
 
                     if '_' in hidden_word:
-                        print("\nSorry, you've run out of attempts. The word was:", selected_word)
+                        print("\nSorry, you've run out of attempts. The word was:\n", selected_word)
                     else:
-                        print(f"Congratulations, you've guessed the {category_name} word!")
+                        print(f"Congratulations, you've guessed the {category_name} word!\n")
                     break
                 else:
-                    print("Invalid category choice. Please select a valid option.")
+                    print("Invalid category choice. Please select a valid option.\n")
+        
         elif choice == "2":
             print("How to Play: ...")  # Add instructions
         elif choice == "3":
             print("Highscores: ...")   # Add highscores
         else:
-            print("Invalid option. Please select a valid option.")
+            print("Invalid option. Please select a valid option.\n")
         
 if __name__ == "__main__":
     start_game()
