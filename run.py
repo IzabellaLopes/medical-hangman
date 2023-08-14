@@ -18,6 +18,20 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Open the 'medical_hangman' Google Sheets
 SHEET = GSPREAD_CLIENT.open('medical_hangman')
 
+# Game Menu
+def main_menu():
+    """
+    Displays the game menu and processes the user's choice.
+    """
+    print("WELCOME TO MEDICAL HANGMAN!")
+    
+    print("\nMenu:")
+    print("1) Play")
+    print("2) How to Play")
+    print("3) Highscores")
+    choice = input("Select an option: ")
+    return choice
+
 # Function to select a random word from a specified column in a Google Sheets worksheet
 def select_random_word_from_sheet(sheet, column_number):
     """
@@ -75,8 +89,8 @@ def check_guess(word, hidden_word, guess):
     
     return updated_hidden_word, correct_guess
 
-# Game Menu and main function
-def main():
+# Main Game logic
+def start_game():
     """
     Main function to run the Medical Hangman game with different word categories.
     
@@ -85,9 +99,7 @@ def main():
         - Organs
         - Diseases or Conditions
         - Radiology
-    """
-    print("Welcome to Medical Hangman!")
-    
+    """   
     categories = [
         ('Bones', 1),
         ('Organs', 2),
@@ -96,25 +108,19 @@ def main():
     ]
 
     while True:
-        print("\nMenu:")
-        print("1) Play")
-        print("2) How to Play")
-        print("3) Highscores")
-        choice = input("Select an option: ")
+        choice = main_menu()
 
         if choice == "1":
             name = input("Enter your name: ")
             print(f"Welcome {name}! Let's play Medical Terms Hangman.")
-
+            
             while True:
                 print("\nChoose the word list you want to play:")
-                print("1) Bones")
-                print("2) Organs")
-                print("3) Diseases or Conditions")
-                print("4) Radiology")
+                for idx, category in enumerate(categories, start=1):
+                    print(f"{idx}) {category[0]}")
                 category_choice = input("Select a category: ")
 
-                if category_choice in ["1", "2", "3", "4"]:
+                if category_choice.isdigit() and 1 <= int(category_choice) <= len(categories):
                     category_name = categories[int(category_choice) - 1][0]
                     selected_word = select_random_word_from_sheet(SHEET, int(category_choice))
                     hidden_word = create_hidden_word(selected_word)
@@ -150,4 +156,4 @@ def main():
             print("Invalid option. Please select a valid option.")
         
 if __name__ == "__main__":
-    main()
+    start_game()
