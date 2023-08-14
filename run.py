@@ -21,13 +21,6 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 # Game Variables
 missed_letters = []
 
-# Function to print lines of underscores
-# From: https://www.youtube.com/watch?v=pFvSb7cb_Us
-def printLines(word):
-    for char in word:
-        print("\u203E", end=" ")
-    print()
-
 # Game Menu
 def main_menu():
     """
@@ -61,7 +54,14 @@ def select_random_word_from_sheet(sheet, column_number):
     random_word = random.choice(words)
     return random_word
 
-# Function to create a hidden word with underscores
+# Function to print lines of underscores
+# From: https://www.youtube.com/watch?v=pFvSb7cb_Us
+def printLines(word):
+    for char in word:
+        print("\u203E", end=" ")
+    print()
+    
+# Function to create a hidden word
 def create_hidden_word(word):
     """
     Creates a string of underscores to match the length of the input word.
@@ -105,6 +105,13 @@ def check_guess(word, hidden_word, guess):
     
     return updated_hidden_word, correct_guess
 
+# Function to calculate the number of letters in a word without spaces
+def calculate_word_length(word):
+    """
+    Calculate the number of letters in a word without spaces.
+    """
+    return len(word.replace(" ", ""))
+
 # Main Game logic
 def start_game():
     """
@@ -143,6 +150,8 @@ def start_game():
                     
                     missed_letters = [] # Reset the missed letters for a new game round
 
+                    word_length = calculate_word_length(selected_word)
+                    print(f"This word has {word_length} letters.")
                     print(f"Hidden {category_name} word:", hidden_word)
                     
                     attempts = 7  # Maximum number of attempts
