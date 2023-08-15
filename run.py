@@ -34,14 +34,6 @@ def clear_terminal():
 
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def cprint(text):
-    """
-    Print the given text centered within a line of width 80 characters.
-    """
-    terminal_width = 80
-    centered_text = f"{text:^{terminal_width}}"
-    print(centered_text)
-
 # Game Menu
 def main_menu():
     """
@@ -51,16 +43,16 @@ def main_menu():
     
     print(f"{ascii_img.WELCOME}")
     line = "=" * 32 + "x" * 16 + "=" * 32
-    cprint(line)
+    print(line)
     print(f"{ascii_img.MENU_IMAGE}")
-    cprint(line)
+    print(line)
     print('')
     option_1 = "1. Play"
     option_2 = "2. How to Play"
     option_3 = "3. Highscores"
     print(f'{option_1 : <27}{option_2 : ^26}{option_3 : >27}')
     print('')
-    cprint(line)
+    print(line)
     print('')
     choice = input("Select an option: ")
     valid_choice = ["1", "2", "3"]
