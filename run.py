@@ -4,6 +4,7 @@ from google.oauth2.service_account import Credentials
 import random
 import os
 import time
+import ascii_img
 
 # List of scopes needed for accessing Google Sheets and Google Drive APIs
 SCOPE = [
@@ -40,7 +41,7 @@ def main_menu():
     """
     clear_terminal()
     
-    print("WELCOME TO MEDICAL HANGMAN!")
+    print(f"{ascii_img.WELCOME}")
     
     print("\nMenu:")
     print("1) Play")
