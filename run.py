@@ -181,6 +181,7 @@ def start_game():
                     
                     missed_letters = [] # Reset the missed letters for a new game round
 
+                    print(f"{ascii_img.MEDICAL}\n")
                     word_length = calculate_word_length(selected_word)
                     print(f"This word has {word_length} letters.\n")
                     print(f"Hidden {category_name} word:", hidden_word)
