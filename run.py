@@ -24,6 +24,7 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 # Game Variables
 missed_letters = []
 FEEDBACK_TIME = 2
+line = "=" * 32 + "x" * 16 + "=" * 32
 
 # Misc Functions
 def clear_terminal():
@@ -34,6 +35,14 @@ def clear_terminal():
 
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def print_centered(text):
+    """
+    Print the given text centered within a line of width 80 characters.
+    """
+    terminal_width = 80
+    centered_text = f"{text:^{terminal_width}}"
+    print(centered_text)
+
 # Game Menu
 def main_menu():
     """
@@ -41,10 +50,9 @@ def main_menu():
     """
     clear_terminal()
     
-    print(f"{ascii_img.WELCOME}")
-    line = "=" * 32 + "x" * 16 + "=" * 32
+    print(f"\033[1;37;40m{ascii_img.WELCOME}")
     print(line)
-    print(f"{ascii_img.MENU_IMAGE}")
+    print(ascii_img.MENU_IMAGE)
     print(line)
     print('')
     option_1 = "1. Play"
@@ -182,12 +190,15 @@ def start_game():
             
             clear_terminal()
             
-            print(f"Welcome {name}! Get ready to play Medical Hangman, where you'll guess medical terms.\n")
+            print(line)
+            print('')
+            print_centered(f"Welcome {name}! Get ready to play Medical Hangman, where you'll guess medical terms.\n")
+            print(line)
             time.sleep(FEEDBACK_TIME)
             
             while True:
                 game_over = False
-                print(f"{ascii_img.CATEGORIES}\n")
+                print(ascii_img.CATEGORIES)
                 for idx, category in enumerate(categories, start=1):
                     print(f"{idx}) {category[0]}")
                 category_choice = input("\nChoose a category by entering the corresponding number: ")
