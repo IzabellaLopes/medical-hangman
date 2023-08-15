@@ -210,6 +210,7 @@ def start_game():
                             print("Missed letters: ", ", ".join(missed_letters))
                         
                         print('')
+                        print(ascii_img.HANGMAN[7 - attempts])
                         print(f"Hidden {category_name} word:", hidden_word)
 
                     # Check for game over conditions
