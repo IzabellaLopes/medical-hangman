@@ -105,7 +105,7 @@ HANGMAN = [
 ''',
     '''
                                 █████████
-                                ██      █   Oh no! You've got a Hangman fracture!
+                                ██      █  Oh no! You've got a Hangman fracture!
                                 ██      x   
                                 ██     /|\\
                                 ██      |

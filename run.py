@@ -50,13 +50,18 @@ def main_menu():
     clear_terminal()
     
     print(f"{ascii_img.WELCOME}")
-    line = "=" * 16 + "xxxxxxxxxxxx" + "=" * 16
+    line = "=" * 32 + "x" * 16 + "=" * 32
     cprint(line)
     print(f"{ascii_img.MENU_IMAGE}")
-    print("1) Play")
-    print("2) How to Play")
-    print("3) Highscores")
-    
+    cprint(line)
+    print('')
+    option_1 = "1. Play"
+    option_2 = "2. How to Play"
+    option_3 = "3. Highscores"
+    print(f'{option_1 : <27}{option_2 : ^26}{option_3 : >27}')
+    print('')
+    cprint(line)
+    print('')
     choice = input("Select an option: ")
     valid_choice = ["1", "2", "3"]
     
