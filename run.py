@@ -5,6 +5,10 @@ import random
 import os
 import time
 import ascii_img
+from colorama import init, Fore, Style
+
+# Initialize Colorama
+init()
 
 # List of scopes needed for accessing Google Sheets and Google Drive APIs
 SCOPE = [
@@ -43,6 +47,12 @@ def print_centered(text):
     centered_text = f"{text:^{terminal_width}}"
     print(centered_text)
 
+def print_bold_light_green_text(text):
+    """
+    Prints the provided text in bold and light green using Colorama.
+    """
+    print(Style.BRIGHT + Fore.LIGHTGREEN_EX + text + Fore.RESET + Style.RESET_ALL)
+
 # Game Menu
 def main_menu():
     """
@@ -50,7 +60,7 @@ def main_menu():
     """
     clear_terminal()
     
-    print(f"\033[1;37;40m{ascii_img.WELCOME}")
+    print_bold_light_green_text(ascii_img.WELCOME)
     print(line)
     print(ascii_img.MENU_IMAGE)
     print(line)
