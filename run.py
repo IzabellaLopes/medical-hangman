@@ -63,6 +63,21 @@ def main_menu():
         return main_menu()
     else:
         return choice
+    
+# Function to take a validated player name input
+def take_player_name():
+    """
+    Takes a validated player name input.
+    """
+    while True:
+        name = input("\nEnter your player name: ")
+        
+        if not name:
+            print("You must enter a name. Please try again.\n")
+        elif not name.isalpha():
+            print("Invalid name. Please enter a valid name containing only letters.\n")
+        else:
+            return name
 
 # Function to select a random word from a specified column in a Google Sheets worksheet
 def select_random_word_from_sheet(sheet, column_number):
@@ -163,7 +178,7 @@ def start_game():
         choice = main_menu()
 
         if choice == "1":
-            name = input("\nEnter your name: ")
+            name = take_player_name()
             
             clear_terminal()
             
