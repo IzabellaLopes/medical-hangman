@@ -28,7 +28,10 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 # Game Variables
 missed_letters = []
 FEEDBACK_TIME = 2
+
+# Create the line
 line = "=" * 32 + "x" * 16 + "=" * 32
+formatted_line = Fore.YELLOW + line + Fore.RESET
 
 # Misc Functions
 def clear_terminal():
@@ -61,16 +64,16 @@ def main_menu():
     clear_terminal()
     
     print_bold_light_green_text(ascii_img.WELCOME)
-    print(line)
+    print(formatted_line)
     print(ascii_img.MENU_IMAGE)
-    print(line)
+    print(formatted_line)
     print('')
     option_1 = "1. Play"
     option_2 = "2. How to Play"
     option_3 = "3. Highscores"
     print(f'{option_1 : <27}{option_2 : ^26}{option_3 : >27}')
     print('')
-    print(line)
+    print(formatted_line)
     print('')
     choice = input("Select an option: ")
     valid_choice = ["1", "2", "3"]
@@ -200,10 +203,10 @@ def start_game():
             
             clear_terminal()
             
-            print(line)
+            print(formatted_line)
             print('')
             print_centered(f"Welcome {name}! Get ready to play Medical Hangman, where you'll guess medical terms.\n")
-            print(line)
+            print(formatted_line)
             time.sleep(FEEDBACK_TIME)
             
             while True:
