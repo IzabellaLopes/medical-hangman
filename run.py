@@ -161,15 +161,15 @@ def start_game():
             
             clear_terminal()
             
-            print(f"Welcome {name}! Let's play Medical Terms Hangman.\n")
+            print(f"Welcome {name}! Get ready to play Medical Hangman, where you'll guess medical terms.\n")
             time.sleep(FEEDBACK_TIME)
             
             while True:
                 game_over = False
-                print("Choose the word list you want to play:\n")
+                print(f"{ascii_img.CATEGORIES}\n")
                 for idx, category in enumerate(categories, start=1):
                     print(f"{idx}) {category[0]}")
-                category_choice = input("\nSelect a category: ")
+                category_choice = input("\nChoose a category by entering the corresponding number: ")
                 time.sleep(FEEDBACK_TIME)
                 
                 clear_terminal()
