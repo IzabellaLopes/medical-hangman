@@ -140,7 +140,7 @@ def take_guess():
     Takes a validated guess input from the user. 
     """
     while True:
-        guess = input("\nTake a guess: ").upper()
+        guess = input(Style.BRIGHT + Fore.LIGHTBLUE_EX + "\nTAKE A GUESS: " + Style.RESET_ALL + Fore.RESET).upper()
         
         if len(guess) != 1 or not guess.isalpha():
             print("\nInvalid guess. Please enter a single letter.\n")
@@ -202,7 +202,7 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
     print(formatted_line)
     print('')
     print_centered(f"{attempts} attempts left\n")
-    print("Missed letters: ", ", ".join(missed_letters))
+    print(Style.BRIGHT + Fore.LIGHTMAGENTA_EX + "Missed letters: "+ Fore.RESET + Style.RESET_ALL, ", ".join(missed_letters))
 
 # Main Game logic
 def start_game():
@@ -274,20 +274,20 @@ def start_game():
                     print(formatted_line)
                     print('')
                     print_centered(f"{attempts} attempts left\n")
-                    print("Missed letters: ", ", ".join(missed_letters))
+                    print(Style.BRIGHT + Fore.LIGHTMAGENTA_EX + "Missed letters: "+ Fore.RESET + Style.RESET_ALL, ", ".join(missed_letters))
                                    
                     while '_' in hidden_word and attempts > 0:
                         guess = take_guess()
                         
                         if guess in missed_letters or guess in hidden_word:
-                            print("\nYou've already guessed that letter. Try again with a different letter.")
+                            print(Fore.LIGHTYELLOW_EX + "\nYou've already guessed that letter. Try again with a different letter." + Fore.RESET)
                         else:
                             hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
                         
                             if correct_guess:
-                                print("\nCorrect guess!")
+                                print(Fore.GREEN + "\nCorrect guess!" + Fore.RESET)
                             else:
-                                print("\nIncorrect guess!")
+                                print(Fore.RED + "\nIncorrect guess!" + Fore.RESET)
                                 # Check if the guess is not a duplicate or already revealed
                                 if guess not in missed_letters and guess not in hidden_word:
                                     missed_letters.append(guess)
