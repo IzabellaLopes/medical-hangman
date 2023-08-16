@@ -55,11 +55,15 @@ def print_mid(*args):
     print(*centered_texts)
 
 
-def print_bold_light_green_text(text):
+def print_bold_light_green_text(*args):
     """
     Prints the provided text in bold and light green using Colorama.
     """
-    print(Style.BRIGHT+Fore.LIGHTGREEN_EX+text+Fore.RESET+Style.RESET_ALL)
+    print(Style.BRIGHT
+          + Fore.LIGHTGREEN_EX
+          + ' '.join(args)
+          + Fore.RESET
+          + Style.RESET_ALL)
 
 
 def bottom_input():
@@ -265,8 +269,8 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
     print('')
 
     word_length = calculate_word_length(hidden_word)
-    print_mid(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
-    print(Style.BRIGHT + f"Hidden {category_name} word:", hidden_word + Style.RESET_ALL)
+    print_mid(f"This word has {word_length} letters\n")
+    print_bold_light_green_text(f"Hidden {category_name} word:", hidden_word)
     print('')
     print(formatted_line)
     print('')
@@ -339,8 +343,8 @@ def start_game():
                     print('')
 
                     word_length = calculate_word_length(hidden_word)
-                    print_mid(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
-                    print(Style.BRIGHT + f"Hidden {category_name} word:", hidden_word + Style.RESET_ALL)
+                    print_mid(f"This word has {word_length} letters\n")
+                    print_bold_light_green_text(f"Hidden {category_name} word:", hidden_word)
                     print('')
                     print(formatted_line)
                     print('')
