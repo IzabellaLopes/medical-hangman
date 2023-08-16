@@ -66,6 +66,13 @@ def print_bold_light_green_text(*args):
           + Style.RESET_ALL)
 
 
+def print_red(text):
+    """
+    Prints the provided text in red using Colorama.
+    """
+    print(Fore.RED + text + Fore.RESET)
+
+
 def bottom_input():
     '''
     Prints the formatted line and waits for user input
@@ -101,7 +108,7 @@ def main_menu():
     valid_choice = ["1", "2", "3"]
 
     if choice not in valid_choice:
-        print(Fore.RED+"Oh no! Invalid choice. Please try again."+Fore.RESET)
+        print_red("Oh no! Invalid choice. Please try again.")
         time.sleep(FEEDBACK_TIME)
         return main_menu()
     else:
@@ -149,12 +156,12 @@ def take_player_name():
     """
     while True:
         name = input("\nEnter your player name: ")
-        
+
         if not name:
-            print(Fore.RED + "You must enter a name. Please try again." + Fore.RESET)
+            print_red("You must enter a name. Please try again.")
             time.sleep(FEEDBACK_TIME)
         elif not name.isalpha():
-            print(Fore.RED+"Invalid name. Please enter a valid name containing only letters."+Fore.RESET)
+            print_red("Invalid name. Please enter a valid name containing only letters.")
             time.sleep(FEEDBACK_TIME)
         else:
             return name
@@ -362,7 +369,7 @@ def start_game():
                             if correct_guess:
                                 print(Fore.GREEN + "\nCorrect guess!" + Fore.RESET)
                             else:
-                                print(Fore.RED + "\nIncorrect guess!" + Fore.RESET)
+                                print_red("\nIncorrect guess!")
                                 # Check if the guess is not a duplicate or already revealed
                                 if guess not in missed_letters and guess not in hidden_word:
                                     missed_letters.append(guess)
@@ -390,7 +397,7 @@ def start_game():
                             time.sleep(FEEDBACK_TIME)
                             return  # Exit the game
                 else:
-                    print(Fore.RED + "Invalid category choice. Please select a valid option." + Fore.RESET)
+                    print_red("Invalid category choice. Please select a valid option.")
         
         elif choice == "2":
             how_to_play()
