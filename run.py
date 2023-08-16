@@ -34,15 +34,19 @@ line = "-+" * 40
 formatted_line = Fore.YELLOW + line + Fore.RESET
 
 # Misc Functions
+
+
 def clear_terminal():
     """
     Clears the terminal.
     """
-    # From: https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    # From:
+    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
 
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def print_centered(*args):
+
+def print_mid(*args):
     """
     Print the given text centered within a line of width 80 characters.
     """
@@ -50,15 +54,18 @@ def print_centered(*args):
     centered_texts = [f"{text:^{terminal_width}}" for text in args]
     print(*centered_texts)
 
+
 def print_bold_light_green_text(text):
     """
     Prints the provided text in bold and light green using Colorama.
     """
-    print(Style.BRIGHT + Fore.LIGHTGREEN_EX + text + Fore.RESET + Style.RESET_ALL)
+    print(Style.BRIGHT+Fore.LIGHTGREEN_EX+text+Fore.RESET+Style.RESET_ALL)
+
 
 def bottom_input():
     '''
-    Prints the formatted line and waits for user input before returning to the menu.
+    Prints the formatted line and waits for user input
+    before returning to the menu.
     '''
     print(formatted_line)
     print()
@@ -66,12 +73,14 @@ def bottom_input():
     main_menu()
 
 # Game Menu
+
+
 def main_menu():
     """
     Displays the game menu and processes the user's choice.
     """
     clear_terminal()
-    
+
     print_bold_light_green_text(ascii_img.WELCOME)
     print(formatted_line)
     print(ascii_img.MENU_IMAGE)
@@ -86,42 +95,47 @@ def main_menu():
     print('')
     choice = input("Select an option: ")
     valid_choice = ["1", "2", "3"]
-    
+
     if choice not in valid_choice:
-        print(Fore.RED + "Oh no! Invalid choice. Please try again." + Fore.RESET)
+        print(Fore.RED+"Oh no! Invalid choice. Please try again."+Fore.RESET)
         time.sleep(FEEDBACK_TIME)
         return main_menu()
     else:
         return choice
-    
+
 # How to play
+
+
 def how_to_play():
     """
-    Provides instructions on how to play Medical Hangman. 
-    """             
+    Provides instructions on how to play Medical Hangman.
+    """
     clear_terminal()
-            
+
     print(formatted_line)
     print()
-    print_centered("Be attentive to the instructions for playing Medical Hangman\n")
+    print_mid("Be attentive to the instructions for playing Medical Hangman")
+    print()
     print(formatted_line)
-            
+
     print_bold_light_green_text(ascii_img.HOW_TO_PLAY)
     print()
-    print_centered("The goal of Medical Hangman is to solve the hidden word.\n")
-    print_centered("You can choose the category that suits you best: bone, organ, disease or condition, or radiology")
-    print_centered("_ _ _ _ _ _ _  _ _ _ _ _ _ _\n")
-    print_centered("Guess one letter at a time.\n")
-    print_centered("If your guess is " + Fore.GREEN + "correct" + Fore.RESET + ", the letter will appear in the word.\n")
-    print_centered("M E D _ C A _  H A _ _ M A _\n")
-    print_centered("If your guess is " + Fore.RED + "incorrect" + Fore.RESET + ", the game stage will advance.\n")
-    print_centered("Upon reaching 7 incorrect guesses, the game will come to an end, resulting in a Hangman fracture.\n")
-    print_centered("M E D I C A L  H A N G M A N")
+    print_mid("The goal of Medical Hangman is to solve the hidden word.\n")
+    print_mid("You can choose the category that suits you best: bone, organ, disease or condition, or radiology")
+    print_mid("_ _ _ _ _ _ _  _ _ _ _ _ _ _\n")
+    print_mid("Guess one letter at a time.\n")
+    print_mid("If your guess is " + Fore.GREEN + "correct" + Fore.RESET + ", the letter will appear in the word.\n")
+    print_mid("M E D _ C A _  H A _ _ M A _\n")
+    print_mid("If your guess is " + Fore.RED + "incorrect" + Fore.RESET + ", the game stage will advance.\n")
+    print_mid("Upon reaching 7 incorrect guesses, the game will come to an end, resulting in a Hangman fracture.\n")
+    print_mid("M E D I C A L  H A N G M A N")
     print('\n')
     
     bottom_input()
             
 # Function to take a validated player name input
+
+
 def take_player_name():
     """
     Takes a validated player name input.
@@ -133,12 +147,14 @@ def take_player_name():
             print(Fore.RED + "You must enter a name. Please try again." + Fore.RESET)
             time.sleep(FEEDBACK_TIME)
         elif not name.isalpha():
-            print(Fore.RED + "Invalid name. Please enter a valid name containing only letters." + Fore.RESET)
+            print(Fore.RED+"Invalid name. Please enter a valid name containing only letters."+Fore.RESET)
             time.sleep(FEEDBACK_TIME)
         else:
             return name
 
 # Function to select a random word from a specified column in a Google Sheets worksheet
+
+
 def select_random_word_from_sheet(sheet, column_number):
     """
     Selects a random word from a specified column in a Google Sheets worksheet.
@@ -159,12 +175,16 @@ def select_random_word_from_sheet(sheet, column_number):
 
 # Function to print lines of underscores
 # From: https://www.youtube.com/watch?v=pFvSb7cb_Us
+
+
 def printLines(word):
     for char in word:
         print("\u203E", end=" ")
     print()
     
 # Function to create a hidden word
+
+
 def create_hidden_word(word):
     """
     Creates a string of underscores to match the length of the input word.
@@ -173,6 +193,8 @@ def create_hidden_word(word):
     return hidden_word
 
 # Function to take a validated guess input from the user
+
+
 def take_guess():
     """
     Takes a validated guess input from the user. 
@@ -186,6 +208,8 @@ def take_guess():
             return guess
         
 # Function to check if the guessed letter is in the word and update the hidden word
+
+
 def check_guess(word, hidden_word, guess):
     """
     Checks if the guessed letter is in the word and updates the hidden word accordingly.
@@ -209,6 +233,8 @@ def check_guess(word, hidden_word, guess):
     return updated_hidden_word, correct_guess
 
 # Function to calculate the number of letters in a word without spaces
+
+
 def calculate_word_length(word):
     """
     Calculate the number of letters in a word without spaces.
@@ -216,6 +242,8 @@ def calculate_word_length(word):
     return len(word.replace(" ", ""))
 
 # Function to update the game display
+
+
 def update_game_display(attempts, hidden_word, missed_letters, category_name):
     """
     Update the game display based on the current game state.
@@ -226,7 +254,7 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
     the hangman image, hidden word, missed letters, and other relevant information.
     """
     clear_terminal()
-    
+
     print_bold_light_green_text(ascii_img.MEDICAL)
     print(formatted_line)
     print(ascii_img.HANGMAN[7 - attempts])
@@ -234,15 +262,17 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
     print('')
 
     word_length = calculate_word_length(hidden_word)
-    print_centered(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
+    print_mid(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
     print(Style.BRIGHT + f"Hidden {category_name} word:", hidden_word + Style.RESET_ALL)
     print('')
     print(formatted_line)
     print('')
-    print_centered(f"{attempts} attempts left\n")
+    print_mid(f"{attempts} attempts left\n")
     print(Style.BRIGHT + Fore.LIGHTMAGENTA_EX + "Missed letters: "+ Fore.RESET + Style.RESET_ALL, ", ".join(missed_letters))
 
 # Main Game logic
+
+
 def start_game():
     """
     Main function to run the Medical Hangman game with different word categories.
@@ -270,7 +300,7 @@ def start_game():
             
             print(formatted_line)
             print('')
-            print_centered(f"Welcome {name}! Get ready to play Medical Hangman, where you'll guess medical terms.\n")
+            print_mid(f"Welcome {name}! Get ready to play Medical Hangman, where you'll guess medical terms.\n")
             print(formatted_line)
             time.sleep(FEEDBACK_TIME)
                      
@@ -294,9 +324,9 @@ def start_game():
                     category_name = categories[int(category_choice) - 1][0]
                     selected_word = select_random_word_from_sheet(SHEET, int(category_choice))
                     hidden_word = create_hidden_word(selected_word)
-                    
+
                     missed_letters = [] # Reset the missed letters for a new game round
-                    
+
                     attempts = 7  # Maximum number of attempts
              
                     print_bold_light_green_text(ascii_img.MEDICAL)
@@ -306,12 +336,12 @@ def start_game():
                     print('')
 
                     word_length = calculate_word_length(hidden_word)
-                    print_centered(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
+                    print_mid(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
                     print(Style.BRIGHT + f"Hidden {category_name} word:", hidden_word + Style.RESET_ALL)
                     print('')
                     print(formatted_line)
                     print('')
-                    print_centered(f"{attempts} attempts left\n")
+                    print_mid(f"{attempts} attempts left\n")
                     print(Style.BRIGHT + Fore.LIGHTMAGENTA_EX + "Missed letters: "+ Fore.RESET + Style.RESET_ALL, ", ".join(missed_letters))
                                    
                     while '_' in hidden_word and attempts > 0:
@@ -360,6 +390,6 @@ def start_game():
         elif choice == "3":
             print("Highscores: ...")   # Add highscores
         
-        
+         
 if __name__ == "__main__":
     start_game()
