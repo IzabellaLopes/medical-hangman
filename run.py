@@ -79,7 +79,7 @@ def main_menu():
     valid_choice = ["1", "2", "3"]
     
     if choice not in valid_choice:
-        print("Oh no! Invalid choice. Please try again.")
+        print(Fore.RED + "Oh no! Invalid choice. Please try again." + Fore.RESET)
         time.sleep(FEEDBACK_TIME)
         return main_menu()
     else:
@@ -94,9 +94,11 @@ def take_player_name():
         name = input("\nEnter your player name: ")
         
         if not name:
-            print("You must enter a name. Please try again.\n")
+            print(Fore.RED + "You must enter a name. Please try again." + Fore.RESET)
+            time.sleep(FEEDBACK_TIME) 
         elif not name.isalpha():
-            print("Invalid name. Please enter a valid name containing only letters.\n")
+            print(Fore.RED + "Invalid name. Please enter a valid name containing only letters." + Fore.RESET)
+            time.sleep(FEEDBACK_TIME)    
         else:
             return name
 
