@@ -161,29 +161,31 @@ def take_player_name():
             print_red("You must enter a name. Please try again.")
             time.sleep(FEEDBACK_TIME)
         elif not name.isalpha():
-            print_red("Invalid name. Please enter a valid name containing only letters.")
+            print_red("Please enter a valid name containing only letters.")
             time.sleep(FEEDBACK_TIME)
         else:
             return name
 
-# Function to select a random word from a specified column in a Google Sheets worksheet
+# Function to select a random word from a specified column
+# in a Google Sheets worksheet
 
 
 def select_random_word_from_sheet(sheet, column_number):
     """
     Selects a random word from a specified column in a Google Sheets worksheet.
-            
+
     Returns:
-        str or None: A randomly selected word or None if the word list is empty.
+        str or None: Randomly selected word or None if the word list is empty.
     """
     WORD_SHEET = sheet.worksheet('word_list')
 
-    # Retrieve the values from the specified column in the 'word_list' worksheet
+    # Retrieve the values from the specified column
+    # in the 'word_list' worksheet
     words = WORD_SHEET.col_values(column_number)
-    
+
     if not words:
         return None
-    
+
     random_word = random.choice(words)
     return random_word
 
@@ -195,7 +197,7 @@ def printLines(word):
     for char in word:
         print("\u203E", end=" ")
     print()
-    
+
 # Function to create a hidden word
 
 
@@ -211,16 +213,16 @@ def create_hidden_word(word):
 
 def take_guess():
     """
-    Takes a validated guess input from the user. 
+    Takes a validated guess input from the user.
     """
     while True:
-        guess = input(Style.BRIGHT + Fore.LIGHTBLUE_EX + "\nTAKE A GUESS: " + Style.RESET_ALL + Fore.RESET).upper()
-        
+        guess = input("\033[1;34m\nTAKE A GUESS: \033[0m").upper()
+
         if len(guess) != 1 or not guess.isalpha():
             print("\nInvalid guess. Please enter a single letter.\n")
         else:
             return guess
-        
+
 # Function to check if the guessed letter is in the word and update the hidden word
 
 
