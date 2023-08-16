@@ -56,6 +56,15 @@ def print_bold_light_green_text(text):
     """
     print(Style.BRIGHT + Fore.LIGHTGREEN_EX + text + Fore.RESET + Style.RESET_ALL)
 
+def bottom_input():
+    '''
+    Prints the formatted line and waits for user input before returning to the menu.
+    '''
+    print(formatted_line)
+    print()
+    input('Press ENTER to return to the menu...')
+    main_menu()
+
 # Game Menu
 def main_menu():
     """
@@ -85,6 +94,33 @@ def main_menu():
     else:
         return choice
     
+# How to play
+def how_to_play():
+    """
+    Provides instructions on how to play Medical Hangman. 
+    """             
+    clear_terminal()
+            
+    print(formatted_line)
+    print()
+    print_centered("Be attentive to the instructions for playing Medical Hangman\n")
+    print(formatted_line)
+            
+    print_bold_light_green_text(ascii_img.HOW_TO_PLAY)
+    print()
+    print_centered("The goal of Medical Hangman is to solve the hidden word.\n")
+    print_centered("You can choose the category that suits you best: bone, organ, disease or condition, or radiology")
+    print_centered("_ _ _ _ _ _ _  _ _ _ _ _ _ _\n")
+    print_centered("Guess one letter at a time.\n")
+    print_centered("If your guess is " + Fore.GREEN + "correct" + Fore.RESET + ", the letter will appear in the word.\n")
+    print_centered("M E D _ C A _  H A _ _ M A _\n")
+    print_centered("If your guess is " + Fore.RED + "incorrect" + Fore.RESET + ", the game stage will advance.\n")
+    print_centered("Upon reaching 7 incorrect guesses, the game will come to an end, resulting in a Hangman fracture.\n")
+    print_centered("M E D I C A L  H A N G M A N")
+    print('\n')
+    
+    bottom_input()
+            
 # Function to take a validated player name input
 def take_player_name():
     """
@@ -320,7 +356,7 @@ def start_game():
                     print(Fore.RED + "Invalid category choice. Please select a valid option." + Fore.RESET)
         
         elif choice == "2":
-            print("How to Play: ...")  # Add instructions
+            how_to_play()
         elif choice == "3":
             print("Highscores: ...")   # Add highscores
         
