@@ -121,18 +121,21 @@ def how_to_play():
     print_bold_light_green_text(ascii_img.HOW_TO_PLAY)
     print()
     print_mid("The goal of Medical Hangman is to solve the hidden word.\n")
-    print_mid("You can choose the category that suits you best: bone, organ, disease or condition, or radiology")
+    print_mid("Choose category: bone, organ, disease, condition, or radiology")
     print_mid("_ _ _ _ _ _ _  _ _ _ _ _ _ _\n")
     print_mid("Guess one letter at a time.\n")
-    print_mid("If your guess is " + Fore.GREEN + "correct" + Fore.RESET + ", the letter will appear in the word.\n")
+    print_mid("If your guess is correct:")
+    print_mid("the letter will appear in the word.\n")
     print_mid("M E D _ C A _  H A _ _ M A _\n")
-    print_mid("If your guess is " + Fore.RED + "incorrect" + Fore.RESET + ", the game stage will advance.\n")
-    print_mid("Upon reaching 7 incorrect guesses, the game will come to an end, resulting in a Hangman fracture.\n")
+    print_mid("If your guess is incorrect:")
+    print_mid("the game stage will advance.\n")
+    print_mid("After 7 wrong guesses:")
+    print_mid("the game ends with a Hangman fracture!\n")
     print_mid("M E D I C A L  H A N G M A N")
     print('\n')
-    
+
     bottom_input()
-            
+
 # Function to take a validated player name input
 
 
