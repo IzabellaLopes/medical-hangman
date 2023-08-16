@@ -196,7 +196,7 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
     print('')
 
     word_length = calculate_word_length(hidden_word)
-    print_centered(Fore.RED + f"This word has {word_length} letters.\n" + Fore.RESET)
+    print_centered(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
     print(Style.BRIGHT + f"Hidden {category_name} word:", hidden_word + Style.RESET_ALL)
     print('')
     print(formatted_line)
@@ -268,7 +268,7 @@ def start_game():
                     print('')
 
                     word_length = calculate_word_length(hidden_word)
-                    print_centered(Fore.RED + f"This word has {word_length} letters.\n" + Fore.RESET)
+                    print_centered(Fore.RED + f"This word has {word_length} letters\n" + Fore.RESET)
                     print(Style.BRIGHT + f"Hidden {category_name} word:", hidden_word + Style.RESET_ALL)
                     print('')
                     print(formatted_line)
@@ -280,18 +280,20 @@ def start_game():
                         guess = take_guess()
                         
                         if guess in missed_letters or guess in hidden_word:
-                            print("\nYou've already guessed that letter. Try again with a different letter.\n")
+                            print("\nYou've already guessed that letter. Try again with a different letter.")
                         else:
                             hidden_word, correct_guess = check_guess(selected_word, hidden_word, guess)
                         
-                        if correct_guess:
-                            print("\nCorrect guess!\n")
-                        else:
-                            print("\nIncorrect guess!\n")
-                            # Check if the guess is not a duplicate or already revealed
-                            if guess not in missed_letters and guess not in hidden_word:
-                                missed_letters.append(guess)
-                                attempts -= 1
+                            if correct_guess:
+                                print("\nCorrect guess!")
+                            else:
+                                print("\nIncorrect guess!")
+                                # Check if the guess is not a duplicate or already revealed
+                                if guess not in missed_letters and guess not in hidden_word:
+                                    missed_letters.append(guess)
+                                    attempts -= 1
+                        
+                        time.sleep(FEEDBACK_TIME)
                                 
                         update_game_display(attempts, hidden_word, missed_letters, category_name)
 
