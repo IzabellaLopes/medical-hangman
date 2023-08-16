@@ -30,7 +30,7 @@ missed_letters = []
 FEEDBACK_TIME = 2
 
 # Create the line
-line = "=" * 32 + "x" * 16 + "=" * 32
+line = "-+" * 40
 formatted_line = Fore.YELLOW + line + Fore.RESET
 
 # Misc Functions
@@ -95,10 +95,10 @@ def take_player_name():
         
         if not name:
             print(Fore.RED + "You must enter a name. Please try again." + Fore.RESET)
-            time.sleep(FEEDBACK_TIME) 
+            time.sleep(FEEDBACK_TIME)
         elif not name.isalpha():
             print(Fore.RED + "Invalid name. Please enter a valid name containing only letters." + Fore.RESET)
-            time.sleep(FEEDBACK_TIME)    
+            time.sleep(FEEDBACK_TIME)
         else:
             return name
 
@@ -317,7 +317,7 @@ def start_game():
                             time.sleep(FEEDBACK_TIME)
                             return  # Exit the game
                 else:
-                    print("Invalid category choice. Please select a valid option.\n")
+                    print(Fore.RED + "Invalid category choice. Please select a valid option." + Fore.RESET)
         
         elif choice == "2":
             print("How to Play: ...")  # Add instructions
