@@ -25,6 +25,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # Open the 'medical_hangman' Google Sheets
 SHEET = GSPREAD_CLIENT.open('medical_hangman')
 
+# Open the 'highscores' Google Sheets
+SCORE_SHEET = SHEET.worksheet('highscores')
+
 # Game Variables
 missed_letters = []
 FEEDBACK_TIME = 2
@@ -74,10 +77,10 @@ def print_red(text):
 
 
 def bottom_input():
-    '''
+    """
     Prints the formatted line and waits for user input
     before returning to the menu.
-    '''
+    """
     print(formatted_line)
     print()
     input('Press ENTER to return to the menu...')
@@ -147,6 +150,25 @@ def how_to_play():
 
     bottom_input()
 
+# Highscores
+
+
+def highscores():
+    """
+    Displays the highscores table.
+    """
+    clear_terminal()
+
+    print(formatted_line)
+    print()
+    print_mid("Who is the best at Medical Hangman?")
+    print()
+    print(formatted_line)
+
+    print_bold_light_green_text(ascii_img.HIGHSCORES)
+    
+    bottom_input()
+    
 # Function to take a validated player name input
 
 
@@ -302,7 +324,7 @@ def handle_game_over():
         clear_terminal()
         return True
     else:
-        print("Thank you for playing Medical Hangman!")
+        print("\nThank you for playing Medical Hangman!")
         time.sleep(FEEDBACK_TIME)
         return False
 
@@ -452,7 +474,7 @@ def start_game():
         elif choice == "2":
             how_to_play()
         elif choice == "3":
-            print("Highscores: ...")   # Add highscores
+            highscores()
 
 if __name__ == "__main__":
     start_game()
