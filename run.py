@@ -164,7 +164,6 @@ def highscores():
     # Sorts data by the second column (highscores)
     # in descending order.
     score_sorted = sorted(score_data, key=lambda x: int(x[1]), reverse=True)
-    # The [:5] is the top five scores.
     draw_table(score_sorted[:10])
 
 
@@ -177,7 +176,7 @@ def draw_table(scores):
     name_h = 'NAME'
     score_h = 'SCORE'
     
-    header_format = f'{rank_h : <6}{name_h : <34}{score_h : <10}'
+    header_format = f'{rank_h : ^6}{name_h : ^34}{score_h : ^10}'
 
     clear_terminal()
 
@@ -190,10 +189,10 @@ def draw_table(scores):
     print_bold_light_green_text(ascii_img.HIGHSCORES)
     print()
     print_mid(header_format)
-    print_mid("=" * 50)
+    print_mid("-+" * 25)
 
     for line in scores:
-        row = f'{rank : <6}{line[0] :<34}{line[1] : <10}'
+        row = f'{rank : ^6}{line[0] :^34}{line[1] : ^10}'
         print_mid(row)
         print_mid('-' * 50)
         rank += 1
@@ -203,17 +202,33 @@ def draw_table(scores):
     bottom_input()
     
 def calculate_score(start_time, end_time, game_word, player_lives):
+    """
+    Calculates the player's score based on game parameters.
+
+    Parameters:
+        start_time (float): The start time of the game.
+        end_time (float): The end time of the game.
+        game_word (str): The word used in the game.
+        player_lives (int): The number of lives the player had.
+
+    Returns:
+        int: The calculated score.
+    """
     seconds = math.floor(end_time - start_time)
     base_score = (len(game_word) * 500) + (player_lives * 1000)
     time_factor = max(1, 10 - seconds // 10)
     final_score = math.ceil(base_score / time_factor)
     return final_score
 
-def save_score_to_sheet(name, category_name, score):
+def save_score_to_sheet(name, score):
     """
     Saves the player's score to the 'highscores' worksheet in the Google Sheets.
+    
+    Parameters:
+        name (str): The player's name.
+        score (int): The player's score.
     """
-    score_data = [name, str(score), time.strftime("%Y-%m-%d %H:%M:%S")]
+    score_data = [name, str(score)]
     SCORE_SHEET.append_row(score_data)
 
 # Function to take a validated player name input
@@ -501,7 +516,7 @@ def start_game():
                         print(ascii_img.SAFE)
                         score = calculate_score(start_time, time.time(), selected_word, attempts)
                         print(f"Your score: {score}")
-                        save_score_to_sheet(name, category_name, score)
+                        save_score_to_sheet(name, score)
                         print()
                     elif attempts == 0:
                         print_bold_light_green_text(ascii_img.OH_NO)
@@ -513,7 +528,7 @@ def start_game():
                         print()
                         score = calculate_score(start_time, time.time(), selected_word, 0)
                         print(f"Your score: {score}")
-                        save_score_to_sheet(name, category_name, score)                       
+                        save_score_to_sheet(name, score)                       
                         print()
                     
                     game_over = True
