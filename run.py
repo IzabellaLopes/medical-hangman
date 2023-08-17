@@ -189,15 +189,6 @@ def select_random_word_from_sheet(sheet, column_number):
     random_word = random.choice(words)
     return random_word
 
-# Function to print lines of underscores
-# From: https://www.youtube.com/watch?v=pFvSb7cb_Us
-
-
-def printLines(word):
-    for char in word:
-        print("\u203E", end=" ")
-    print()
-
 # Function to create a hidden word
 
 
