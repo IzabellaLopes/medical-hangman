@@ -6,6 +6,7 @@ import os
 import time
 import ascii_img
 from colorama import init, Fore, Style
+import math
 
 # Initialize Colorama
 init()
@@ -31,6 +32,7 @@ SCORE_SHEET = SHEET.worksheet('highscores')
 # Game Variables
 missed_letters = []
 FEEDBACK_TIME = 2
+start_time = time.time()
 
 # Create the line
 line = "-+" * 40
@@ -157,6 +159,26 @@ def highscores():
     """
     Displays the highscores table.
     """
+      
+    score_data = SCORE_SHEET.get_all_values()
+    # Sorts data by the second column (highscores)
+    # in descending order.
+    score_sorted = sorted(score_data, key=lambda x: int(x[1]), reverse=True)
+    # The [:5] is the top five scores.
+    draw_table(score_sorted[:10])
+
+
+def draw_table(scores):
+    '''
+    Draws score table with data from highscores().
+    '''
+    rank = 1
+    rank_h = 'RANK'
+    name_h = 'NAME'
+    score_h = 'SCORE'
+    
+    header_format = f'{rank_h : <6}{name_h : <34}{score_h : <10}'
+
     clear_terminal()
 
     print(formatted_line)
@@ -166,9 +188,34 @@ def highscores():
     print(formatted_line)
 
     print_bold_light_green_text(ascii_img.HIGHSCORES)
-    
+    print()
+    print_mid(header_format)
+    print_mid("=" * 50)
+
+    for line in scores:
+        row = f'{rank : <6}{line[0] :<34}{line[1] : <10}'
+        print_mid(row)
+        print_mid('-' * 50)
+        rank += 1
+
+    print('\n' * 2)
+
     bottom_input()
     
+def calculate_score(start_time, end_time, game_word, player_lives):
+    seconds = math.floor(end_time - start_time)
+    base_score = (len(game_word) * 500) + (player_lives * 1000)
+    time_factor = max(1, 10 - seconds // 10)
+    final_score = math.ceil(base_score / time_factor)
+    return final_score
+
+def save_score_to_sheet(name, category_name, score):
+    """
+    Saves the player's score to the 'highscores' worksheet in the Google Sheets.
+    """
+    score_data = [name, str(score), time.strftime("%Y-%m-%d %H:%M:%S")]
+    SCORE_SHEET.append_row(score_data)
+
 # Function to take a validated player name input
 
 
@@ -452,6 +499,10 @@ def start_game():
                     if '_' not in hidden_word:
                         print_bold_light_green_text(ascii_img.WELL_DONE)
                         print(ascii_img.SAFE)
+                        score = calculate_score(start_time, time.time(), selected_word, attempts)
+                        print(f"Your score: {score}")
+                        save_score_to_sheet(name, category_name, score)
+                        print()
                     elif attempts == 0:
                         print_bold_light_green_text(ascii_img.OH_NO)
                         print_red("You've run out of attempts.\n")
@@ -459,6 +510,10 @@ def start_game():
                               + Fore.LIGHTRED_EX
                               + f"The word was:", selected_word
                               + Style.RESET_ALL)
+                        print()
+                        score = calculate_score(start_time, time.time(), selected_word, 0)
+                        print(f"Your score: {score}")
+                        save_score_to_sheet(name, category_name, score)                       
                         print()
                     
                     game_over = True
