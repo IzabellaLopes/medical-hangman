@@ -35,7 +35,6 @@ formatted_line = Fore.YELLOW + line + Fore.RESET
 
 # Misc Functions
 
-
 def clear_terminal():
     """
     Clears the terminal.
@@ -194,10 +193,14 @@ def select_random_word_from_sheet(sheet, column_number):
 
 def create_hidden_word(word):
     """
-    Creates a string of underscores to match the length of the input word.
+    Creates a formatted string of underscores to match
+    the length of the input word.
+    Adds spaces between letters for compound words,
+    and regular spaces for spaces between words.
     """
-    hidden_word = ''.join(['_' if char != ' ' else ' ' for char in word])
-    return hidden_word
+    formatted_hidden_word = ' '.join(['_' if char != ' ' else ' '
+                                      for char in word])
+    return formatted_hidden_word
 
 # Function to take a validated guess input from the user
 
@@ -215,7 +218,7 @@ def take_guess():
             return guess
 
 # Function to check if the guessed letter is in the word
-# and update the hidden word
+# and updates the hidden word
 
 
 def check_guess(word, hidden_word, guess):
@@ -227,19 +230,19 @@ def check_guess(word, hidden_word, guess):
         return hidden_word, False
 
     correct_guess = False
-    updated_hidden_word = ''
+    updated_hidden_word = list(hidden_word)
 
     for i in range(len(word)):
         if word[i] == guess:
-            updated_hidden_word += guess
+            if (updated_hidden_word[i * 2] == '_' or
+               updated_hidden_word[i * 2] == ' '):
+                updated_hidden_word[i * 2] = guess
             correct_guess = True
-        else:
-            updated_hidden_word += hidden_word[i]
 
     if not correct_guess and guess not in missed_letters:
         missed_letters.append(guess)
 
-    return updated_hidden_word, correct_guess
+    return ''.join(updated_hidden_word), correct_guess
 
 # Function to calculate the number of letters in a word without spaces
 
@@ -377,8 +380,7 @@ def start_game():
 
                         if guess in missed_letters or guess in hidden_word:
                             print(Fore.LIGHTYELLOW_EX
-                                  + "\nYou've already guessed that letter.\
-                                      Try again with a different letter."
+                                  + "\nYou've already guessed that letter."
                                   + Fore.RESET)
                         else:
                             hidden_word, correct_guess = check_guess(
@@ -431,7 +433,6 @@ def start_game():
             how_to_play()
         elif choice == "3":
             print("Highscores: ...")   # Add highscores
-
 
 if __name__ == "__main__":
     start_game()
