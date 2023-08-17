@@ -409,7 +409,7 @@ def start_game():
 
                     # Check for game over conditions
                     if '_' not in hidden_word:
-                        print(f"Congratulations, you've guessed the {category_name} word!\n")
+                        print_bold_light_green_text(ascii_img.WELL_DONE)
                         game_over = True
                     elif attempts == 0:
                         print("\nSorry, you've run out of attempts. The word was:", selected_word)
