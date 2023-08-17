@@ -1,12 +1,16 @@
-# Imports
+# Standard Library Imports
+import os
+import time
+import math
+
+# Third-party Imports
 import gspread
 from google.oauth2.service_account import Credentials
 import random
-import os
-import time
-import ascii_img
 from colorama import init, Fore, Style
-import math
+
+# Local Imports
+import ascii_img
 
 # Initialize Colorama
 init()
@@ -38,7 +42,7 @@ start_time = time.time()
 line = "-+" * 40
 formatted_line = Fore.YELLOW + line + Fore.RESET
 
-# Misc Functions
+# Utility Functions
 
 
 def clear_terminal():
