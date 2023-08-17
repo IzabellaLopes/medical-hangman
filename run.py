@@ -288,6 +288,24 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
           + Fore.RESET
           + Style.RESET_ALL, ", ".join(missed_letters))
 
+# Function to handle game over logic
+
+
+def handle_game_over():
+    """
+    Handles the game over logic by prompting the player to play again or exit.
+    """
+    play_again = input(Fore.LIGHTGREEN_EX
+                       + "Do you want to play again? (y/n): "
+                       + Fore.RESET)
+    if play_again.lower() == "y":
+        clear_terminal()
+        return True
+    else:
+        print("Thank you for playing Medical Hangman!")
+        time.sleep(FEEDBACK_TIME)
+        return False
+
 # Main Game logic
 
 
@@ -412,7 +430,6 @@ def start_game():
                     if '_' not in hidden_word:
                         print_bold_light_green_text(ascii_img.WELL_DONE)
                         print(ascii_img.SAFE)
-                        game_over = True
                     elif attempts == 0:
                         print_bold_light_green_text(ascii_img.OH_NO)
                         print_red("You've run out of attempts.\n")
@@ -421,18 +438,13 @@ def start_game():
                               + f"The word was:", selected_word
                               + Style.RESET_ALL)
                         print()
-                        game_over = True
-
-                    if game_over:
-                        play_again = input(
-                            "Do you want to play again? (y/n): ")
-                        if play_again.lower() == "y":
-                            clear_terminal()
-                            break
-                        else:
-                            print("Thank you for playing Medical Hangman!")
-                            time.sleep(FEEDBACK_TIME)
-                            return  # Exit the game
+                    
+                    game_over = True
+                    if handle_game_over():
+                        game_over = False
+                        continue
+                    else:
+                        return
                 else:
                     print_red("Invalid category choice.\
                         Please select a valid option.")
