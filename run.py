@@ -159,7 +159,7 @@ def highscores():
     """
     Displays the highscores table.
     """
-      
+
     score_data = SCORE_SHEET.get_all_values()
     # Sorts data by the second column (highscores)
     # in descending order.
@@ -175,7 +175,7 @@ def draw_table(scores):
     rank_h = 'RANK'
     name_h = 'NAME'
     score_h = 'SCORE'
-    
+
     header_format = f'{rank_h : ^6}{name_h : ^34}{score_h : ^10}'
 
     clear_terminal()
@@ -200,7 +200,8 @@ def draw_table(scores):
     print('\n' * 2)
 
     bottom_input()
-    
+
+
 def calculate_score(start_time, end_time, game_word, player_lives):
     """
     Calculates the player's score based on game parameters.
@@ -220,10 +221,12 @@ def calculate_score(start_time, end_time, game_word, player_lives):
     final_score = math.ceil(base_score / time_factor)
     return final_score
 
+
 def save_score_to_sheet(name, score):
     """
-    Saves the player's score to the 'highscores' worksheet in the Google Sheets.
-    
+    Saves the player's score to the 'highscores' worksheet
+    in the Google Sheets.
+
     Parameters:
         name (str): The player's name.
         score (int): The player's score.
@@ -377,18 +380,29 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
 
 def handle_game_over():
     """
-    Handles the game over logic by prompting the player to play again or exit.
+    Handles the game over logic by prompting the player to play again,
+    see highscores, or exit.
     """
-    play_again = input(Fore.LIGHTGREEN_EX
-                       + "Do you want to play again? (y/n): "
-                       + Fore.RESET)
-    if play_again.lower() == "y":
-        clear_terminal()
-        return True
-    else:
-        print("\nThank you for playing Medical Hangman!")
-        time.sleep(FEEDBACK_TIME)
-        return False
+    while True:
+        print_bold_light_green_text("Would you like to play again?")
+        play_again = input(Fore.LIGHTGREEN_EX
+                           + "Please enter 'y' for yes, 'n' for no, "
+                           "or 'h' to see the highscores: "
+                           + Fore.RESET)
+        if play_again.lower() == "y":
+            clear_terminal()
+            return True
+        elif play_again.lower() == "n":
+            print("\nThank you for playing Medical Hangman!")
+            time.sleep(FEEDBACK_TIME)
+            return False
+        elif play_again.lower() == "h":
+            print_bold_light_green_text("\nLoading highscores...")
+            time.sleep(FEEDBACK_TIME)
+            highscores()
+        else:
+            print_red("\nInvalid choice. Please enter 'y' to play again, "
+                      "'n' to exit, or 'h' to see highscores.")
 
 # Main Game logic
 
@@ -514,7 +528,8 @@ def start_game():
                     if '_' not in hidden_word:
                         print_bold_light_green_text(ascii_img.WELL_DONE)
                         print(ascii_img.SAFE)
-                        score = calculate_score(start_time, time.time(), selected_word, attempts)
+                        score = calculate_score(start_time, time.time(),
+                                                selected_word, attempts)
                         print(f"Your score: {score}")
                         save_score_to_sheet(name, score)
                         print()
@@ -526,11 +541,12 @@ def start_game():
                               + f"The word was:", selected_word
                               + Style.RESET_ALL)
                         print()
-                        score = calculate_score(start_time, time.time(), selected_word, 0)
+                        score = calculate_score(start_time, time.time(),
+                                                selected_word, 0)
                         print(f"Your score: {score}")
-                        save_score_to_sheet(name, score)                       
+                        save_score_to_sheet(name, score)
                         print()
-                    
+
                     game_over = True
                     if handle_game_over():
                         game_over = False
@@ -546,5 +562,7 @@ def start_game():
         elif choice == "3":
             highscores()
 
+
 if __name__ == "__main__":
     start_game()
+
