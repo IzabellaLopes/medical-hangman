@@ -35,6 +35,7 @@ formatted_line = Fore.YELLOW + line + Fore.RESET
 
 # Misc Functions
 
+
 def clear_terminal():
     """
     Clears the terminal.
@@ -413,7 +414,13 @@ def start_game():
                         print(ascii_img.SAFE)
                         game_over = True
                     elif attempts == 0:
-                        print("\nSorry, you've run out of attempts. The word was:", selected_word)
+                        print_bold_light_green_text(ascii_img.OH_NO)
+                        print_red("You've run out of attempts.\n")
+                        print(Style.BRIGHT
+                              + Fore.LIGHTRED_EX
+                              + f"The word was:", selected_word
+                              + Style.RESET_ALL)
+                        print()
                         game_over = True
 
                     if game_over:
