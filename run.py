@@ -89,7 +89,7 @@ def bottom_input():
     """
     print(formatted_line)
     print()
-    input('Press ENTER to return to the menu...')
+    input('Press ENTER to return to the menu...\n')
     main_menu()
 
 # Game Menu
@@ -113,7 +113,7 @@ def main_menu():
     print('')
     print(formatted_line)
     print('')
-    choice = input("Select an option: ")
+    choice = input("Select an option: \n")
     valid_choice = ["1", "2", "3"]
 
     if choice not in valid_choice:
@@ -246,7 +246,7 @@ def take_player_name():
     Takes a validated player name input.
     """
     while True:
-        name = input("\nEnter your player name: ")
+        name = input("\nEnter your player name: \n")
 
         if not name:
             print_red("You must enter a name. Please try again.")
@@ -302,7 +302,7 @@ def take_guess():
     Takes a validated guess input from the user.
     """
     while True:
-        guess = input("\033[1;34m\nTAKE A GUESS: \033[0m").upper()
+        guess = input("\033[1;34m\nTAKE A GUESS: \033[0m\n").upper()
 
         if len(guess) != 1 or not guess.isalpha():
             print("\nInvalid guess. Please enter a single letter.\n")
@@ -392,7 +392,7 @@ def handle_game_over():
         play_again = input(Fore.LIGHTGREEN_EX
                            + "Please enter 'y' for yes, 'n' for no, "
                            "or 'h' to see the highscores: "
-                           + Fore.RESET)
+                           + Fore.RESET + "\n")
         if play_again.lower() == "y":
             clear_terminal()
             return True
@@ -460,7 +460,8 @@ def start_game():
                     if idx < len(categories):
                         print('')
 
-                category_choice = input("\nEnter category number: ")
+                print()
+                category_choice = input("Enter category number:\n")
                 time.sleep(FEEDBACK_TIME)
 
                 clear_terminal()
