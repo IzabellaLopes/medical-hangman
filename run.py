@@ -34,8 +34,9 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 SCORE_SHEET = SHEET.worksheet('highscores')
 
 # Game Variables
-missed_letters = []
+TERMINAL_WIDTH = 80
 FEEDBACK_TIME = 2
+missed_letters = []
 start_time = time.time()
 
 # Create the line
@@ -59,12 +60,11 @@ def print_mid(*args):
     """
     Print the given text centered within a line of width 80 characters.
     """
-    terminal_width = 80
-    centered_texts = [f"{text:^{terminal_width}}" for text in args]
+    centered_texts = [f"{text:^{TERMINAL_WIDTH}}" for text in args]
     print(*centered_texts)
 
 
-def print_bold_light_green_text(*args):
+def print_bold_light_green(*args):
     """
     Prints the provided text in bold and light green using Colorama.
     """
@@ -101,19 +101,16 @@ def main_menu():
     """
     clear_terminal()
 
-    print_bold_light_green_text(ascii_img.WELCOME)
+    print_bold_light_green(ascii_img.WELCOME)
     print(formatted_line)
-    print(ascii_img.MENU_IMAGE)
-    print(formatted_line)
-    print('')
+    print(Style.BRIGHT + ascii_img.MENU_IMAGE + Style.RESET_ALL)
     option_1 = "1. Play"
     option_2 = "2. How to Play"
     option_3 = "3. Highscores"
-    print(f'{option_1 : <27}{option_2 : ^26}{option_3 : >27}')
-    print('')
+    print_bold_light_green(
+        f'{option_1 : ^27}{option_2 : ^26}{option_3 : ^27}')
     print(formatted_line)
-    print('')
-    choice = input("Select an option: \n")
+    choice = input(Style.BRIGHT + "Select an option: " + Style.RESET_ALL)
     valid_choice = ["1", "2", "3"]
 
     if choice not in valid_choice:
@@ -138,7 +135,7 @@ def how_to_play():
     print()
     print(formatted_line)
 
-    print_bold_light_green_text(ascii_img.HOW_TO_PLAY)
+    print_bold_light_green(ascii_img.HOW_TO_PLAY)
     print()
     print_mid("The goal of Medical Hangman is to solve the hidden word.\n")
     print_mid("Choose category: bone, organ, disease, condition, or radiology")
@@ -190,7 +187,7 @@ def draw_table(scores):
     print()
     print(formatted_line)
 
-    print_bold_light_green_text(ascii_img.HIGHSCORES)
+    print_bold_light_green(ascii_img.HIGHSCORES)
     print()
     print_mid(header_format)
     print_mid("-+" * 25)
@@ -360,7 +357,7 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
     """
     clear_terminal()
 
-    print_bold_light_green_text(ascii_img.MEDICAL)
+    print_bold_light_green(ascii_img.MEDICAL)
     print(formatted_line)
     print(ascii_img.HANGMAN[7 - attempts])
     print(formatted_line)
@@ -368,7 +365,7 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
 
     word_length = calculate_word_length(hidden_word)
     print_mid(f"This word has {word_length} letters\n")
-    print_bold_light_green_text(f"Hidden {category_name} word:", hidden_word)
+    print_bold_light_green(f"Hidden {category_name} word:", hidden_word)
     print('')
     print(formatted_line)
     print('')
@@ -388,7 +385,7 @@ def handle_game_over():
     see highscores, or exit.
     """
     while True:
-        print_bold_light_green_text("Would you like to play again?")
+        print_bold_light_green("Would you like to play again?")
         play_again = input(Fore.LIGHTGREEN_EX
                            + "Please enter 'y' for yes, 'n' for no, "
                            "or 'h' to see the highscores: "
@@ -401,7 +398,7 @@ def handle_game_over():
             time.sleep(FEEDBACK_TIME)
             return False
         elif play_again.lower() == "h":
-            print_bold_light_green_text("\nLoading highscores...")
+            print_bold_light_green("\nLoading highscores...")
             time.sleep(FEEDBACK_TIME)
             highscores()
         else:
@@ -446,7 +443,7 @@ def start_game():
 
             while True:
                 game_over = False
-                print_bold_light_green_text(ascii_img.CATEGORIES)
+                print_bold_light_green(ascii_img.CATEGORIES)
                 print('')
                 for idx, category in enumerate(categories, start=1):
                     formatted_category = (Style.BRIGHT
@@ -477,7 +474,7 @@ def start_game():
 
                     attempts = 7  # Maximum number of attempts
 
-                    print_bold_light_green_text(ascii_img.MEDICAL)
+                    print_bold_light_green(ascii_img.MEDICAL)
                     print(formatted_line)
                     print(ascii_img.HANGMAN[7 - attempts])
                     print(formatted_line)
@@ -485,7 +482,7 @@ def start_game():
 
                     word_length = calculate_word_length(hidden_word)
                     print_mid(f"This word has {word_length} letters\n")
-                    print_bold_light_green_text(
+                    print_bold_light_green(
                         f"Hidden {category_name} word:", hidden_word)
                     print('')
                     print(formatted_line)
@@ -531,7 +528,7 @@ def start_game():
 
                     # Check for game over conditions
                     if '_' not in hidden_word:
-                        print_bold_light_green_text(ascii_img.WELL_DONE)
+                        print_bold_light_green(ascii_img.WELL_DONE)
                         print(ascii_img.SAFE)
                         score = calculate_score(start_time, time.time(),
                                                 selected_word, attempts)
@@ -539,7 +536,7 @@ def start_game():
                         save_score_to_sheet(name, score)
                         print()
                     elif attempts == 0:
-                        print_bold_light_green_text(ascii_img.OH_NO)
+                        print_bold_light_green(ascii_img.OH_NO)
                         print_red("You've run out of attempts.\n")
                         print(Style.BRIGHT
                               + Fore.LIGHTRED_EX
