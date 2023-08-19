@@ -89,7 +89,8 @@ def bottom_input():
     """
     print(formatted_line)
     input(Style.BRIGHT
-          + "\nPress ENTER to return to the menu..."
+          + Fore.LIGHTGREEN_EX
+          + "Press ENTER to return to the menu..."
           + Style.RESET_ALL)
     main_menu()
 
@@ -146,7 +147,7 @@ def how_to_play():
     print_mid("After 7 wrong guesses: "
               "the game ends with a Hangman fracture!\n")
     print_mid("M E D I C A L  H A N G M A N")
-
+    
     bottom_input()
 
 # Highscores
