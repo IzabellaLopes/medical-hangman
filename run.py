@@ -143,7 +143,7 @@ def how_to_play():
 
     print_header(ascii_img.HOW_TO_PLAY)
     
-    print_mid("\nThe goal of Medical Hangman is to solve the hidden word.\n")
+    print_mid("The goal of Medical Hangman is to solve the hidden word.\n")
     print_mid("Choose category: BONE, ORGAN, DISEASE OR CONDITION, "
               "or RADIOLOGY\n")
     print_mid("Guess one letter at a time.\n")
@@ -271,11 +271,13 @@ def choose_category(name, categories):
     print(FORMATTED_LINE)
     print()
     print_mid(f"Welcome {name}!")
-    print_mid("Get ready to play Medical Hangman!\n")
+    print()
+    print_mid("Prepare for a round of Medical Hangman. "
+              "Select your medical word category now!\n")
     print(FORMATTED_LINE)
     time.sleep(FEEDBACK_TIME)
     print_header(ascii_img.CATEGORIES)
-
+    
     for idx, category in enumerate(categories, start=1):
         formatted_category = (Style.BRIGHT
                               + f"{idx})"
