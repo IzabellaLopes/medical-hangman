@@ -380,15 +380,14 @@ def calculate_word_length(word):
 # Function to update the game display
 
 
-def update_game_display(attempts, hidden_word, missed_letters,
+def update_game_display(hidden_word, missed_letters,
                         category_name, hangman_stage):
     """
     Update the game display based on the current game state.
 
-    This function takes the current number of attempts, the hidden word,
-    the list of missed letters, the category name, and the hangman stage
-    as inputs and updates the visual representation of the game display
-    accordingly.
+    This function takes the hidden word, the list of missed letters,
+    the category name, and the hangman stage as inputs and updates
+    the visual representation of the game display accordingly.
     It prints the hangman image, hidden word, missed letters,
     and other relevant information.
     """
@@ -405,7 +404,6 @@ def update_game_display(attempts, hidden_word, missed_letters,
         f"Hidden {category_name} word:", hidden_word)
     print()
     print(formatted_line)
-    print_mid(f"{attempts} attempts left")
     print(Style.BRIGHT
           + Fore.LIGHTMAGENTA_EX
           + "Missed letters: "
@@ -486,7 +484,6 @@ def start_game():
                     hangman_stage = 7 - attempts
 
                     update_game_display(
-                            attempts,
                             hidden_word,
                             missed_letters,
                             category_name,
@@ -520,7 +517,6 @@ def start_game():
                         time.sleep(FEEDBACK_TIME)
                         hangman_stage = 7 - attempts
                         update_game_display(
-                            attempts,
                             hidden_word,
                             missed_letters,
                             category_name,
