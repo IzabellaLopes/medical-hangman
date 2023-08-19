@@ -100,6 +100,9 @@ def bottom_input():
 def main_menu():
     """
     Displays the game menu and processes the user's choice.
+
+    Returns:
+        str: The user's choice (1, 2, or 3).
     """
     clear_terminal()
 
@@ -234,6 +237,9 @@ def save_score_to_sheet(name, score):
 def player_name():
     """
     Takes a validated player name input.
+
+    Returns:
+        str: The player's name.
     """
     while True:
         name = input(Style.BRIGHT
@@ -248,8 +254,10 @@ def player_name():
             time.sleep(FEEDBACK_TIME)
         else:
             return name
-        
+
 # Function to display categories and get player's choice
+
+
 def choose_category(name, categories):
     """
     Display available categories and let the player choose one.
@@ -264,7 +272,7 @@ def choose_category(name, categories):
     time.sleep(FEEDBACK_TIME)
     print_bold_light_green(ascii_img.CATEGORIES)
     print()
-                
+
     for idx, category in enumerate(categories, start=1):
         formatted_category = (Style.BRIGHT
                               + f"{idx})"
@@ -274,12 +282,11 @@ def choose_category(name, categories):
         print(formatted_category)
 
         if idx < len(categories):
-                       print()
+            print()
 
     category_choice = input(Style.BRIGHT
-                            + "\nEnter category number: "
+                            + "\nEnter the category number: "
                             + Style.RESET_ALL)
-        
     return category_choice
 
 # Function to select a random word from a specified column
@@ -327,10 +334,10 @@ def take_guess():
     Takes a validated guess input from the user.
     """
     while True:
-        guess = input("\033[1;34m\nTAKE A GUESS: \033[0m\n").upper()
+        guess = input("\033[1;34m\nTAKE A GUESS: \033[0m").upper()
 
         if len(guess) != 1 or not guess.isalpha():
-            print("\nInvalid guess. Please enter a single letter.\n")
+            print("Invalid guess. Please enter a single letter.")
         else:
             return guess
 
@@ -373,13 +380,15 @@ def calculate_word_length(word):
 # Function to update the game display
 
 
-def update_game_display(attempts, hidden_word, missed_letters, category_name):
+def update_game_display(attempts, hidden_word, missed_letters,
+                        category_name, hangman_stage):
     """
     Update the game display based on the current game state.
 
     This function takes the current number of attempts, the hidden word,
-    the list of missed letters, and the category name as inputs and updates
-    the visual representation of the game display accordingly.
+    the list of missed letters, the category name, and the hangman stage
+    as inputs and updates the visual representation of the game display
+    accordingly.
     It prints the hangman image, hidden word, missed letters,
     and other relevant information.
     """
@@ -387,17 +396,16 @@ def update_game_display(attempts, hidden_word, missed_letters, category_name):
 
     print_bold_light_green(ascii_img.MEDICAL)
     print(formatted_line)
-    print(ascii_img.HANGMAN[7 - attempts])
+    print(ascii_img.HANGMAN[hangman_stage])
     print(formatted_line)
-    print('')
 
     word_length = calculate_word_length(hidden_word)
     print_mid(f"This word has {word_length} letters\n")
-    print_bold_light_green(f"Hidden {category_name} word:", hidden_word)
-    print('')
+    print_bold_light_green(
+        f"Hidden {category_name} word:", hidden_word)
+    print()
     print(formatted_line)
-    print('')
-    print_mid(f"{attempts} attempts left\n")
+    print_mid(f"{attempts} attempts left")
     print(Style.BRIGHT
           + Fore.LIGHTMAGENTA_EX
           + "Missed letters: "
@@ -475,33 +483,22 @@ def start_game():
                     missed_letters = []  # Reset missed letters for a new game
 
                     attempts = 7  # Maximum number of attempts
+                    hangman_stage = 7 - attempts
 
-                    print_bold_light_green(ascii_img.MEDICAL)
-                    print(formatted_line)
-                    print(ascii_img.HANGMAN[7 - attempts])
-                    print(formatted_line)
-                    print('')
-
-                    word_length = calculate_word_length(hidden_word)
-                    print_mid(f"This word has {word_length} letters\n")
-                    print_bold_light_green(
-                        f"Hidden {category_name} word:", hidden_word)
-                    print('')
-                    print(formatted_line)
-                    print('')
-                    print_mid(f"{attempts} attempts left\n")
-                    print(Style.BRIGHT
-                          + Fore.LIGHTMAGENTA_EX
-                          + "Missed letters: "
-                          + Fore.RESET
-                          + Style.RESET_ALL, ", ".join(missed_letters))
+                    update_game_display(
+                            attempts,
+                            hidden_word,
+                            missed_letters,
+                            category_name,
+                            hangman_stage
+                    )
 
                     while '_' in hidden_word and attempts > 0:
                         guess = take_guess()
 
                         if guess in missed_letters or guess in hidden_word:
                             print(Fore.LIGHTYELLOW_EX
-                                  + "\nYou've already guessed that letter."
+                                  + "You've already guessed that letter."
                                   + Fore.RESET)
                         else:
                             hidden_word, correct_guess = check_guess(
@@ -509,10 +506,10 @@ def start_game():
 
                             if correct_guess:
                                 print(Fore.GREEN
-                                      + "\nCorrect guess!"
+                                      + "Correct guess!"
                                       + Fore.RESET)
                             else:
-                                print_red("\nIncorrect guess!")
+                                print_red("Incorrect guess!")
                                 # Check if the guess is not a duplicate
                                 # or already revealed
                                 if guess not in missed_letters and \
@@ -521,12 +518,14 @@ def start_game():
                                     attempts -= 1
 
                         time.sleep(FEEDBACK_TIME)
-
+                        hangman_stage = 7 - attempts
                         update_game_display(
                             attempts,
                             hidden_word,
                             missed_letters,
-                            category_name)
+                            category_name,
+                            hangman_stage
+                        )
 
                     # Check for game over conditions
                     if '_' not in hidden_word:
@@ -551,14 +550,12 @@ def start_game():
                         save_score_to_sheet(name, score)
                         print()
 
-                    game_over = True
                     if handle_game_over():
-                        game_over = False
                         continue
                     else:
                         return
                 else:
-                    print_red("Invalid category choice."
+                    print_red("Invalid category choice. "
                               "Please select a valid option.")
                     time.sleep(FEEDBACK_TIME)
 
@@ -570,4 +567,3 @@ def start_game():
 
 if __name__ == "__main__":
     start_game()
-
