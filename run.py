@@ -110,7 +110,7 @@ def main_menu():
     print_bold_light_green(
         f'{option_1 : ^27}{option_2 : ^26}{option_3 : ^27}')
     print(formatted_line)
-    choice = input(Style.BRIGHT + "Select an option: " + Style.RESET_ALL)
+    choice = input(Style.BRIGHT + "\nSelect an option: " + Style.RESET_ALL)
     valid_choice = ["1", "2", "3"]
 
     if choice not in valid_choice:
@@ -238,12 +238,14 @@ def save_score_to_sheet(name, score):
 # Function to take a validated player name input
 
 
-def take_player_name():
+def player_name():
     """
     Takes a validated player name input.
     """
     while True:
-        name = input("\nEnter your player name: \n")
+        name = input(Style.BRIGHT
+                     + "\nEnter your player name: "
+                     + Style.RESET_ALL)
 
         if not name:
             print_red("You must enter a name. Please try again.")
@@ -430,7 +432,7 @@ def start_game():
         choice = main_menu()
 
         if choice == "1":
-            name = take_player_name()
+            name = player_name()
 
             clear_terminal()
 
