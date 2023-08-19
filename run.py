@@ -248,6 +248,39 @@ def player_name():
             time.sleep(FEEDBACK_TIME)
         else:
             return name
+        
+# Function to display categories and get player's choice
+def choose_category(name, categories):
+    """
+    Display available categories and let the player choose one.
+    """
+    clear_terminal()
+
+    print(formatted_line)
+    print()
+    print_mid(f"Welcome {name}!")
+    print_mid("Get ready to play Medical Hangman!\n")
+    print(formatted_line)
+    time.sleep(FEEDBACK_TIME)
+    print_bold_light_green(ascii_img.CATEGORIES)
+    print()
+                
+    for idx, category in enumerate(categories, start=1):
+        formatted_category = (Style.BRIGHT
+                              + f"{idx})"
+                              + Fore.LIGHTCYAN_EX
+                              + f" {category[0]}"
+                              + Style.RESET_ALL)
+        print(formatted_category)
+
+        if idx < len(categories):
+                       print()
+
+    category_choice = input(Style.BRIGHT
+                            + "\nEnter category number: "
+                            + Style.RESET_ALL)
+        
+    return category_choice
 
 # Function to select a random word from a specified column
 # in a Google Sheets worksheet
@@ -427,36 +460,10 @@ def start_game():
         if choice == "1":
             name = player_name()
 
-            clear_terminal()
-
-            print(formatted_line)
-            print('')
-            print_mid(f"Welcome {name}!")
-            print_mid("Get ready to play Medical Hangman!\n")
-            print(formatted_line)
-            time.sleep(FEEDBACK_TIME)
-
             while True:
-                game_over = False
-                print_bold_light_green(ascii_img.CATEGORIES)
-                print('')
-                for idx, category in enumerate(categories, start=1):
-                    formatted_category = (Style.BRIGHT
-                                          + f"{idx})"
-                                          + Fore.LIGHTCYAN_EX
-                                          + f" {category[0]}"
-                                          + Style.RESET_ALL)
-
-                    print(formatted_category)
-
-                    if idx < len(categories):
-                        print('')
-
-                print()
-                category_choice = input("Enter category number:\n")
-                time.sleep(FEEDBACK_TIME)
-
                 clear_terminal()
+
+                category_choice = choose_category(name, categories)
 
                 if category_choice.isdigit() and \
                         1 <= int(category_choice) <= len(categories):
@@ -551,8 +558,9 @@ def start_game():
                     else:
                         return
                 else:
-                    print_red("Invalid category choice.\
-                        Please select a valid option.")
+                    print_red("Invalid category choice."
+                              "Please select a valid option.")
+                    time.sleep(FEEDBACK_TIME)
 
         elif choice == "2":
             how_to_play()
