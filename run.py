@@ -337,7 +337,7 @@ def take_guess():
         guess = input("\033[1;34m\nTAKE A GUESS: \033[0m").upper()
 
         if len(guess) != 1 or not guess.isalpha():
-            print("Invalid guess. Please enter a single letter.")
+            print_red("Invalid guess. Please enter a single letter.")
         else:
             return guess
 
@@ -446,7 +446,7 @@ def handle_game_over():
 # Main Game logic
 
 
-def start_game():
+def main():
     """
     Main function to run the Medical Hangman game
     with different word categories.
@@ -566,4 +566,4 @@ def start_game():
 
 
 if __name__ == "__main__":
-    start_game()
+    main()
