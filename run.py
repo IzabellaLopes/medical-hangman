@@ -147,7 +147,7 @@ def how_to_play():
     print_mid("After 7 wrong guesses: "
               "the game ends with a Hangman fracture!\n")
     print_mid("M E D I C A L  H A N G M A N")
-    
+
     bottom_input()
 
 # Highscores
@@ -155,14 +155,14 @@ def how_to_play():
 
 def highscores():
     """
-    Displays the highscores table.
+    Displays the Top 5 highscores table.
     """
 
     score_data = SCORE_SHEET.get_all_values()
     # Sorts data by the second column (highscores)
     # in descending order.
     score_sorted = sorted(score_data, key=lambda x: int(x[1]), reverse=True)
-    draw_table(score_sorted[:10])
+    draw_table(score_sorted[:5])
 
 
 def draw_table(scores):
@@ -178,14 +178,10 @@ def draw_table(scores):
 
     clear_terminal()
 
-    print(formatted_line)
-    print()
-    print_mid("Who is the best at Medical Hangman?")
-    print()
-    print(formatted_line)
-
     print_bold_light_green(ascii_img.HIGHSCORES)
+    print(formatted_line)
     print()
+    print_mid("Top 5 Highscores\n")
     print_mid(header_format)
     print_mid("-+" * 25)
 
@@ -195,7 +191,7 @@ def draw_table(scores):
         print_mid('-' * 50)
         rank += 1
 
-    print('\n' * 2)
+    print()
 
     bottom_input()
 
