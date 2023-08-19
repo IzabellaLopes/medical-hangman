@@ -250,7 +250,7 @@ def player_name():
         if not name:
             print_red("You must enter a name. Please try again.")
             time.sleep(FEEDBACK_TIME)
-        elif not name.isalpha():
+        elif not name.replace(" ", "").isalpha():
             print_red("Please enter a valid name containing only letters.")
             time.sleep(FEEDBACK_TIME)
         else:
