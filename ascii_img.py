@@ -116,7 +116,7 @@ HANGMAN = [
 
 MENU_IMAGE = '''                                  ▄▄▄▄▄▄▄▄▄▄▄ 
                                   ██      ▐░▌  
-                                  ██       O    Make sure you don't end up with a      
+                                  ██       O   Make sure you don't end up with a
                                   ██      /|\\          Hangman fracture!
                                   ██       |
                                   ██      / \\
