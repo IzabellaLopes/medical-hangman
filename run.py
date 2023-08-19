@@ -138,7 +138,6 @@ def how_to_play():
     print_mid("Choose category: BONE, ORGAN, DISEASE OR CONDITION, "
               "or RADIOLOGY\n")
     print_mid("Guess one letter at a time.\n")
-    print_mid("_ _ _ _ _ _ _  _ _ _ _ _ _ _\n")
     print_mid("If your guess is correct: "
               "the letter will appear in the word.\n")
     print_mid("M E D _ C A _  H A _ _ M A _\n")
@@ -146,7 +145,7 @@ def how_to_play():
               "the game stage will advance.\n")
     print_mid("After 7 wrong guesses: "
               "the game ends with a Hangman fracture!\n")
-    print_mid("M E D I C A L  H A N G M A N\n")
+    print_mid("M E D I C A L  H A N G M A N")
 
     bottom_input()
 
