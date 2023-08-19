@@ -88,8 +88,9 @@ def bottom_input():
     before returning to the menu.
     """
     print(formatted_line)
-    print()
-    input('Press ENTER to return to the menu...\n')
+    input(Style.BRIGHT
+          + "\nPress ENTER to return to the menu..."
+          + Style.RESET_ALL)
     main_menu()
 
 # Game Menu
@@ -129,27 +130,23 @@ def how_to_play():
     """
     clear_terminal()
 
-    print(formatted_line)
-    print()
-    print_mid("Be attentive to the instructions for playing Medical Hangman")
-    print()
+    print_bold_light_green(ascii_img.HOW_TO_PLAY)
     print(formatted_line)
 
-    print_bold_light_green(ascii_img.HOW_TO_PLAY)
     print()
     print_mid("The goal of Medical Hangman is to solve the hidden word.\n")
-    print_mid("Choose category: bone, organ, disease, condition, or radiology")
-    print_mid("_ _ _ _ _ _ _  _ _ _ _ _ _ _\n")
+    print_mid("Choose category: BONE, ORGAN, DISEASE OR CONDITION, "
+              "or RADIOLOGY\n")
     print_mid("Guess one letter at a time.\n")
-    print_mid("If your guess is correct:")
-    print_mid("the letter will appear in the word.\n")
+    print_mid("_ _ _ _ _ _ _  _ _ _ _ _ _ _\n")
+    print_mid("If your guess is correct: "
+              "the letter will appear in the word.\n")
     print_mid("M E D _ C A _  H A _ _ M A _\n")
-    print_mid("If your guess is incorrect:")
-    print_mid("the game stage will advance.\n")
-    print_mid("After 7 wrong guesses:")
-    print_mid("the game ends with a Hangman fracture!\n")
-    print_mid("M E D I C A L  H A N G M A N")
-    print('\n')
+    print_mid("If your guess is incorrect: "
+              "the game stage will advance.\n")
+    print_mid("After 7 wrong guesses: "
+              "the game ends with a Hangman fracture!\n")
+    print_mid("M E D I C A L  H A N G M A N\n")
 
     bottom_input()
 
