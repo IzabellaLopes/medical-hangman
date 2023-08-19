@@ -395,7 +395,11 @@ def update_game_display(hidden_word, missed_letters,
 
     print_bold_light_green(ascii_img.MEDICAL)
     print(formatted_line)
-    print(ascii_img.HANGMAN[hangman_stage])
+    if hangman_stage == 7:
+        colored_hangman_stage = Fore.RED + ascii_img.HANGMAN[hangman_stage] + Fore.RESET
+        print(colored_hangman_stage)
+    else:
+        print(ascii_img.HANGMAN[hangman_stage])
     print(formatted_line)
 
     word_length = calculate_word_length(hidden_word)
