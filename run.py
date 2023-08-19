@@ -69,7 +69,6 @@ def print_header(ascii_image):
     """
     print_bold_light_green(ascii_image)
     print(FORMATTED_LINE)
-    print()
 
 
 def print_bold_light_green(*args):
@@ -272,11 +271,12 @@ def choose_category(name, categories):
     print()
     print_mid(f"Welcome {name}!")
     print()
-    print_mid("Prepare for a round of Medical Hangman. "
+    print_mid(" Prepare for a round of Medical Hangman. "
               "Select your medical word category now!\n")
     print(FORMATTED_LINE)
     time.sleep(FEEDBACK_TIME)
     print_header(ascii_img.CATEGORIES)
+    print()
     
     for idx, category in enumerate(categories, start=1):
         formatted_category = (Style.BRIGHT
@@ -428,16 +428,16 @@ def handle_game_over():
     see highscores, or exit.
     """
     while True:
-        print_bold_light_green("Would you like to play again?")
+        print_bold_light_green("Would you like to play again?\n")
         play_again = input(Fore.LIGHTGREEN_EX
                            + "Please enter 'y' for yes, 'n' for no, "
                            "or 'h' to see the highscores: "
-                           + Fore.RESET + "\n")
+                           + Fore.RESET)
         if play_again.lower() == "y":
             clear_terminal()
             return True
         elif play_again.lower() == "n":
-            print("\nThank you for playing Medical Hangman!")
+            print_mid("\nThank you for playing Medical Hangman!")
             time.sleep(FEEDBACK_TIME)
             return False
         elif play_again.lower() == "h":
@@ -534,13 +534,23 @@ def main():
 
                     # Check for game over conditions
                     if '_' not in hidden_word:
-                        print_bold_light_green(ascii_img.WELL_DONE)
-                        print(ascii_img.SAFE)
+                        clear_terminal()
+
+                        print_header(ascii_img.WELL_DONE)
+    
+                        print(Fore.LIGHTCYAN_EX + ascii_img.SAFE + Fore.RESET)
+                        
+                        print(FORMATTED_LINE)
+
                         score = calculate_score(start_time, time.time(),
                                                 selected_word, attempts)
-                        print(f"Your score: {score}")
+                        print()
+                        print(Style.BRIGHT + f"You've guessed the hidden {category_name} word that was {hidden_word}." + Style.RESET_ALL)
+                        print()
+                        print(Style.BRIGHT + Fore.BLUE + f"YOUR SCORE: {score}" + Style.RESET_ALL)
                         save_score_to_sheet(name, score)
                         print()
+                        
                     elif attempts == 0:
                         print_bold_light_green(ascii_img.OH_NO)
                         print_red("You've run out of attempts.\n")
