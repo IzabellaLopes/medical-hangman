@@ -1,19 +1,22 @@
-# Standard Library Imports
+# Imports
 import os
 import time
 import math
-
-# Third-party Imports
 import gspread
 from google.oauth2.service_account import Credentials
 import random
 from colorama import init, Fore, Style
-
-# Local Imports
 import ascii_img
 
 # Initialize Colorama
 init()
+
+# Constants
+TERMINAL_WIDTH = 80
+FEEDBACK_TIME = 2
+HANGMAN_STAGES = 7
+FORMATTED_LINE = Fore.YELLOW + "-+" * 40 + Fore.RESET
+SCORE_RANGE = 5
 
 # List of scopes needed for accessing Google Sheets and Google Drive APIs
 SCOPE = [
@@ -34,14 +37,8 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 SCORE_SHEET = SHEET.worksheet('highscores')
 
 # Game Variables
-TERMINAL_WIDTH = 80
-FEEDBACK_TIME = 2
 missed_letters = []
 start_time = time.time()
-
-# Create the line
-line = "-+" * 40
-formatted_line = Fore.YELLOW + line + Fore.RESET
 
 # Utility Functions
 
@@ -62,6 +59,17 @@ def print_mid(*args):
     """
     centered_texts = [f"{text:^{TERMINAL_WIDTH}}" for text in args]
     print(*centered_texts)
+
+def print_header(ascii_image):
+    """
+    Prints the provided ASCII image as a header along with a formatted line.
+
+    Args:
+        ascii_image (str): The ASCII image to be printed as the header.
+    """
+    print_bold_light_green(ascii_image)
+    print(FORMATTED_LINE)
+    print()
 
 
 def print_bold_light_green(*args):
@@ -87,7 +95,7 @@ def bottom_input():
     Prints the formatted line and waits for user input
     before returning to the menu.
     """
-    print(formatted_line)
+    print(FORMATTED_LINE)
     input(Style.BRIGHT
           + Fore.LIGHTGREEN_EX
           + "Press ENTER to return to the menu..."
@@ -106,15 +114,14 @@ def main_menu():
     """
     clear_terminal()
 
-    print_bold_light_green(ascii_img.WELCOME)
-    print(formatted_line)
+    print_header(ascii_img.WELCOME)
     print(Style.BRIGHT + ascii_img.MENU_IMAGE + Style.RESET_ALL)
     option_1 = "1. Play"
     option_2 = "2. How to Play"
     option_3 = "3. Highscores"
     print_bold_light_green(
         f'{option_1 : ^27}{option_2 : ^26}{option_3 : ^27}')
-    print(formatted_line)
+    print(FORMATTED_LINE)
     choice = input(Style.BRIGHT + "\nSelect an option: " + Style.RESET_ALL)
     valid_choice = ["1", "2", "3"]
 
@@ -134,11 +141,9 @@ def how_to_play():
     """
     clear_terminal()
 
-    print_bold_light_green(ascii_img.HOW_TO_PLAY)
-    print(formatted_line)
-
-    print()
-    print_mid("The goal of Medical Hangman is to solve the hidden word.\n")
+    print_header(ascii_img.HOW_TO_PLAY)
+    
+    print_mid("\nThe goal of Medical Hangman is to solve the hidden word.\n")
     print_mid("Choose category: BONE, ORGAN, DISEASE OR CONDITION, "
               "or RADIOLOGY\n")
     print_mid("Guess one letter at a time.\n")
@@ -181,9 +186,8 @@ def draw_table(scores):
 
     clear_terminal()
 
-    print_bold_light_green(ascii_img.HIGHSCORES)
-    print(formatted_line)
-    print()
+    print_header(ascii_img.HIGHSCORES)
+
     print_mid("Top 5 Highscores\n")
     print_mid(header_format)
     print_mid("-+" * 25)
@@ -264,14 +268,13 @@ def choose_category(name, categories):
     """
     clear_terminal()
 
-    print(formatted_line)
+    print(FORMATTED_LINE)
     print()
     print_mid(f"Welcome {name}!")
     print_mid("Get ready to play Medical Hangman!\n")
-    print(formatted_line)
+    print(FORMATTED_LINE)
     time.sleep(FEEDBACK_TIME)
-    print_bold_light_green(ascii_img.CATEGORIES)
-    print()
+    print_header(ascii_img.CATEGORIES)
 
     for idx, category in enumerate(categories, start=1):
         formatted_category = (Style.BRIGHT
@@ -393,21 +396,21 @@ def update_game_display(hidden_word, missed_letters,
     """
     clear_terminal()
 
-    print_bold_light_green(ascii_img.MEDICAL)
-    print(formatted_line)
+    print_header(ascii_img.MEDICAL)
+    
     if hangman_stage == 7:
         colored_hangman_stage = Fore.RED + ascii_img.HANGMAN[hangman_stage] + Fore.RESET
         print(colored_hangman_stage)
     else:
         print(ascii_img.HANGMAN[hangman_stage])
-    print(formatted_line)
+    print(FORMATTED_LINE)
 
     word_length = calculate_word_length(hidden_word)
     print_mid(f"This word has {word_length} letters\n")
     print_bold_light_green(
         f"Hidden {category_name} word:", hidden_word)
     print()
-    print(formatted_line)
+    print(FORMATTED_LINE)
     print(Style.BRIGHT
           + Fore.LIGHTMAGENTA_EX
           + "Missed letters: "
