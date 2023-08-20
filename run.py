@@ -60,6 +60,7 @@ def print_mid(*args):
     centered_texts = [f"{text:^{TERMINAL_WIDTH}}" for text in args]
     print(*centered_texts)
 
+
 def print_header(ascii_image):
     """
     Prints the provided ASCII image as a header along with a formatted line.
@@ -141,7 +142,7 @@ def how_to_play():
     clear_terminal()
 
     print_header(ascii_img.HOW_TO_PLAY)
-    
+
     print_mid("The goal of Medical Hangman is to solve the hidden word.\n")
     print_mid("Choose category: BONE, ORGAN, DISEASE OR CONDITION, "
               "or RADIOLOGY\n")
@@ -277,7 +278,7 @@ def choose_category(name, categories):
     time.sleep(FEEDBACK_TIME)
     print_header(ascii_img.CATEGORIES)
     print()
-    
+
     for idx, category in enumerate(categories, start=1):
         formatted_category = (Style.BRIGHT
                               + f"{idx})"
@@ -399,12 +400,15 @@ def update_game_display(hidden_word, missed_letters,
     clear_terminal()
 
     print_header(ascii_img.MEDICAL)
-    
+
     if hangman_stage == 7:
-        colored_hangman_stage = Fore.RED + ascii_img.HANGMAN[hangman_stage] + Fore.RESET
+        colored_hangman_stage = (Fore.RED
+                                 + ascii_img.HANGMAN[hangman_stage]
+                                 + Fore.RESET)
         print(colored_hangman_stage)
     else:
         print(ascii_img.HANGMAN[hangman_stage])
+
     print(FORMATTED_LINE)
 
     word_length = calculate_word_length(hidden_word)
@@ -537,31 +541,55 @@ def main():
                         clear_terminal()
 
                         print_header(ascii_img.WELL_DONE)
-    
+
                         print(Fore.LIGHTCYAN_EX + ascii_img.SAFE + Fore.RESET)
-                        
+
                         print(FORMATTED_LINE)
 
                         score = calculate_score(start_time, time.time(),
                                                 selected_word, attempts)
                         print()
-                        print(Style.BRIGHT + f"You've guessed the hidden {category_name} word that was {hidden_word}." + Style.RESET_ALL)
+                        print(
+                            Style.BRIGHT
+                            + f"You've guessed the hidden {category_name} "
+                            + "word that was "
+                            + f"{selected_word}."
+                            + Style.RESET_ALL)
                         print()
-                        print(Style.BRIGHT + Fore.BLUE + f"YOUR SCORE: {score}" + Style.RESET_ALL)
+                        print(
+                            Style.BRIGHT
+                            + Fore.BLUE
+                            + f"YOUR SCORE: {score}" + Style.RESET_ALL)
                         save_score_to_sheet(name, score)
                         print()
-                        
+
                     elif attempts == 0:
-                        print_bold_light_green(ascii_img.OH_NO)
-                        print_red("You've run out of attempts.\n")
-                        print(Style.BRIGHT
-                              + Fore.LIGHTRED_EX
-                              + f"The word was:", selected_word
-                              + Style.RESET_ALL)
-                        print()
+                        clear_terminal()
+
+                        print_header(ascii_img.GAME_OVER)
+
+                        colored_hangman_stage = (
+                            Fore.RED
+                            + ascii_img.HANGMAN[7]
+                            + Fore.RESET)
+                        print(colored_hangman_stage)
+
+                        print(FORMATTED_LINE)
+
                         score = calculate_score(start_time, time.time(),
                                                 selected_word, 0)
-                        print(f"Your score: {score}")
+                        print()
+                        print(
+                            Style.BRIGHT
+                            + f"The hidden {category_name} word was "
+                            + f"{selected_word}."
+                            + Style.RESET_ALL)
+                        print()
+                        print(
+                            Style.BRIGHT
+                            + Fore.BLUE
+                            + f"YOUR SCORE: {score}"
+                            + Style.RESET_ALL)
                         save_score_to_sheet(name, score)
                         print()
 
