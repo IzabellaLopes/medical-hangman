@@ -147,7 +147,7 @@ def how_to_play():
     print_mid("If your guess is incorrect: "
               "the game stage will advance.\n")
     print_mid("After 7 wrong guesses: "
-              "the game ends with a Hangman fracture!\n")
+              "the game ends with a Hangman's fracture!\n")
     print_mid("M E D I C A L  H A N G M A N")
 
     bottom_input()

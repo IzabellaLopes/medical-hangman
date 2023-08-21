@@ -87,7 +87,7 @@ HANGMAN = [
     r"""                                  ▄▄▄▄▄▄▄▄▄▄▄
                                   ██      ▐░▌
                                   ██       x           Oh no! You've got a
-                                  ██      /|\            Hangman fracture!
+                                  ██      /|\          Hangman's fracture!
                                   ██       |
                                   ██      / \
                                   ██
@@ -98,7 +98,7 @@ HANGMAN = [
 MENU_IMAGE = r"""                                  ▄▄▄▄▄▄▄▄▄▄▄
                                   ██      ▐░▌
                                   ██       O       Make sure you don't end up
-                                  ██      /|\        with a Hangman fracture!
+                                  ██      /|\      with a Hangman's fracture!
                                   ██       |
                                   ██      / \
                                   ██
