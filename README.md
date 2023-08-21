@@ -122,6 +122,25 @@ Medical Hangman is designed to cater to the following target audience:
 
 ### Color Scheme
 
+Medical Hangman employs a carefully chosen color scheme to enhance the visual experience and improve readability. The color scheme is implemented using the colorama library, which allows for easy text coloring and formatting. Here are the key color elements used in the game:
+
+- BOLD (Bright Text): Highlights essential content with increased brightness.
+
+- BOLD_GREEN: Uses vibrant green for headings, menus, and important messages.
+
+- GREEN: Represents correct guesses and positive outcomes.
+
+- BOLD_BLUE: Applies blue to the "Take a guess" prompt and the player's score, capturing the player's focus.
+
+- BOLD_MAGENTA: Utilizes bold magenta to denote missed letters, facilitating quick identification.
+
+- RED: Signals errors, mistakes, or unsuccessful attempts.
+
+- YELLOW: Separates sections with yellow lines for organization.
+
+- CYAN: Differentiates categories with cyan text.
+
+
 ### Imagery
 
 [Back to Contents](#contents)
