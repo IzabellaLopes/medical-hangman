@@ -7,6 +7,7 @@ from google.oauth2.service_account import Credentials
 import random
 from colorama import init, Fore, Style
 import ascii_img
+import subprocess
 
 # Colorama
 init()
@@ -57,10 +58,8 @@ def clear_terminal():
     """
     Clears the terminal.
     """
-    # From:
-    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
 
-    os.system('cls' if os.name == 'nt' else 'clear')
+    subprocess.call('cls' if os.name == 'nt' else 'clear', shell=True)
 
 
 def print_mid(*args):
@@ -415,13 +414,15 @@ def update_game_display(hidden_word, missed_letters,
     word_length = calculate_word_length(hidden_word)
     print_mid(f"This word has {word_length} letters\n")
     print(BOLD_GREEN
-          + f"Hidden {category_name} word:", hidden_word + RESET)
+          + f"Hidden {category_name} word:", hidden_word
+          + RESET)
     print()
     print(FORMATTED_LINE)
     print(BOLD_MAGENTA
           + "Missed letters: "
           + RESET
-          + ", ".join(missed_letters) + RESET)
+          + ", ".join(missed_letters)
+          + RESET)
 
 # Function to handle game over logic
 
