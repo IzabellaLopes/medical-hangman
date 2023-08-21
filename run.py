@@ -7,7 +7,6 @@ from google.oauth2.service_account import Credentials
 import random
 from colorama import init, Fore, Style
 import ascii_img
-import subprocess
 
 # Colorama
 init()
@@ -59,7 +58,7 @@ def clear_terminal():
     Clears the terminal.
     """
 
-    subprocess.call('cls' if os.name == 'nt' else 'clear', shell=True)
+    os.system('cls' if os.name == 'nt' else "printf '\033c'")
 
 
 def print_mid(*args):
