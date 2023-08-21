@@ -8,14 +8,24 @@ import random
 from colorama import init, Fore, Style
 import ascii_img
 
-# Initialize Colorama
+# Colorama
 init()
+
+BOLD = Style.BRIGHT
+BOLD_GREEN = Style.BRIGHT + Fore.LIGHTGREEN_EX
+GREEN = Fore.LIGHTGREEN_EX
+BOLD_BLUE = Style.BRIGHT + Fore.LIGHTBLUE_EX
+BOLD_MAGENTA = Style.BRIGHT + Fore.LIGHTMAGENTA_EX
+RED = Fore.RED
+YELLOW = Fore.YELLOW
+CYAN = Fore.LIGHTCYAN_EX
+RESET = Style.RESET_ALL
 
 # Constants
 TERMINAL_WIDTH = 80
 FEEDBACK_TIME = 2
 HANGMAN_STAGES = 7
-FORMATTED_LINE = Fore.YELLOW + "-+" * 40 + Fore.RESET
+FORMATTED_LINE = YELLOW + "-+" * 40 + RESET
 SCORE_RANGE = 5
 
 # List of scopes needed for accessing Google Sheets and Google Drive APIs
@@ -68,26 +78,8 @@ def print_header(ascii_image):
     Args:
         ascii_image (str): The ASCII image to be printed as the header.
     """
-    print_bold_light_green(ascii_image)
+    print(BOLD_GREEN + ascii_image + RESET)
     print(FORMATTED_LINE)
-
-
-def print_bold_light_green(*args):
-    """
-    Prints the provided text in bold and light green using Colorama.
-    """
-    print(Style.BRIGHT
-          + Fore.LIGHTGREEN_EX
-          + ' '.join(args)
-          + Fore.RESET
-          + Style.RESET_ALL)
-
-
-def print_red(text):
-    """
-    Prints the provided text in red using Colorama.
-    """
-    print(Fore.RED + text + Fore.RESET)
 
 
 def bottom_input():
@@ -96,10 +88,9 @@ def bottom_input():
     before returning to the menu.
     """
     print(FORMATTED_LINE)
-    input(Style.BRIGHT
-          + Fore.LIGHTGREEN_EX
+    input(BOLD_GREEN
           + "Press ENTER to return to the menu..."
-          + Style.RESET_ALL)
+          + RESET)
     main_menu()
 
 # Game Menu
@@ -115,18 +106,18 @@ def main_menu():
     clear_terminal()
 
     print_header(ascii_img.WELCOME)
-    print(Style.BRIGHT + ascii_img.MENU_IMAGE + Style.RESET_ALL)
+    print(BOLD + ascii_img.MENU_IMAGE + RESET)
     option_1 = "1. Play"
     option_2 = "2. How to Play"
     option_3 = "3. Highscores"
-    print_bold_light_green(
-        f'{option_1 : ^27}{option_2 : ^26}{option_3 : ^27}')
+    print(BOLD_GREEN
+          + f'{option_1 : ^27}{option_2 : ^26}{option_3 : ^27}' + RESET)
     print(FORMATTED_LINE)
-    choice = input(Style.BRIGHT + "\nSelect an option: " + Style.RESET_ALL)
+    choice = input(BOLD + "\nSelect an option: " + RESET)
     valid_choice = ["1", "2", "3"]
 
     if choice not in valid_choice:
-        print_red("Oh no! Invalid choice. Please try again.")
+        print(RED + "Oh no! Invalid choice. Please try again." + RESET)
         time.sleep(FEEDBACK_TIME)
         return main_menu()
     else:
@@ -246,15 +237,19 @@ def player_name():
         str: The player's name.
     """
     while True:
-        name = input(Style.BRIGHT
+        name = input(BOLD
                      + "\nEnter your player name: "
-                     + Style.RESET_ALL)
+                     + RESET)
 
         if not name:
-            print_red("You must enter a name. Please try again.")
+            print(RED
+                  + "You must enter a name. Please try again."
+                  + RESET)
             time.sleep(FEEDBACK_TIME)
         elif not name.replace(" ", "").isalpha():
-            print_red("Please enter a valid name containing only letters.")
+            print(RED
+                  + "Please enter a valid name containing only letters."
+                  + RESET)
             time.sleep(FEEDBACK_TIME)
         else:
             return name
@@ -280,19 +275,19 @@ def choose_category(name, categories):
     print()
 
     for idx, category in enumerate(categories, start=1):
-        formatted_category = (Style.BRIGHT
+        formatted_category = (BOLD
                               + f"{idx})"
-                              + Fore.LIGHTCYAN_EX
+                              + CYAN
                               + f" {category[0]}"
-                              + Style.RESET_ALL)
+                              + RESET)
         print(formatted_category)
 
         if idx < len(categories):
             print()
 
-    category_choice = input(Style.BRIGHT
+    category_choice = input(BOLD
                             + "\nEnter the category number: "
-                            + Style.RESET_ALL)
+                            + RESET)
     return category_choice
 
 # Function to select a random word from a specified column
@@ -340,10 +335,10 @@ def take_guess():
     Takes a validated guess input from the user.
     """
     while True:
-        guess = input("\033[1;34m\nTAKE A GUESS: \033[0m").upper()
+        guess = input(f"{BOLD_BLUE}\nTAKE A GUESS: {RESET}").upper()
 
         if len(guess) != 1 or not guess.isalpha():
-            print_red("Invalid guess. Please enter a single letter.")
+            print(RED + "Invalid guess. Please enter a single letter." + RESET)
         else:
             return guess
 
@@ -402,9 +397,9 @@ def update_game_display(hidden_word, missed_letters,
     print_header(ascii_img.MEDICAL)
 
     if hangman_stage == 7:
-        colored_hangman_stage = (Fore.RED
+        colored_hangman_stage = (RED
                                  + ascii_img.HANGMAN[hangman_stage]
-                                 + Fore.RESET)
+                                 + RESET)
         print(colored_hangman_stage)
     else:
         print(ascii_img.HANGMAN[hangman_stage])
@@ -413,15 +408,14 @@ def update_game_display(hidden_word, missed_letters,
 
     word_length = calculate_word_length(hidden_word)
     print_mid(f"This word has {word_length} letters\n")
-    print_bold_light_green(
-        f"Hidden {category_name} word:", hidden_word)
+    print(BOLD_GREEN
+          + f"Hidden {category_name} word:", hidden_word + RESET)
     print()
     print(FORMATTED_LINE)
-    print(Style.BRIGHT
-          + Fore.LIGHTMAGENTA_EX
+    print(BOLD_MAGENTA
           + "Missed letters: "
-          + Fore.RESET
-          + Style.RESET_ALL, ", ".join(missed_letters))
+          + RESET
+          + ", ".join(missed_letters) + RESET)
 
 # Function to handle game over logic
 
@@ -432,11 +426,11 @@ def handle_game_over():
     see highscores, or exit.
     """
     while True:
-        print_bold_light_green("Would you like to play again?\n")
-        play_again = input(Fore.LIGHTGREEN_EX
+        print(BOLD_GREEN + "Would you like to play again?\n" + RESET)
+        play_again = input(BOLD_GREEN
                            + "Please enter 'y' for yes, 'n' for no, "
                            "or 'h' to see the highscores: "
-                           + Fore.RESET)
+                           + RESET)
         if play_again.lower() == "y":
             clear_terminal()
             return True
@@ -445,12 +439,14 @@ def handle_game_over():
             time.sleep(FEEDBACK_TIME)
             return False
         elif play_again.lower() == "h":
-            print_bold_light_green("\nLoading highscores...")
+            print(GREEN + "\nLoading highscores..." + RESET)
             time.sleep(FEEDBACK_TIME)
             highscores()
         else:
-            print_red("\nInvalid choice. Please enter 'y' to play again, "
-                      "'n' to exit, or 'h' to see highscores.")
+            print(RED
+                  + "\nInvalid choice. Please enter 'y' to play again, "
+                  "'n' to exit, or 'h' to see highscores."
+                  + RESET)
 
 # Main Game logic
 
@@ -507,19 +503,19 @@ def main():
                         guess = take_guess()
 
                         if guess in missed_letters or guess in hidden_word:
-                            print(Fore.LIGHTYELLOW_EX
+                            print(YELLOW
                                   + "You've already guessed that letter."
-                                  + Fore.RESET)
+                                  + RESET)
                         else:
                             hidden_word, correct_guess = check_guess(
                                 selected_word, hidden_word, guess)
 
                             if correct_guess:
-                                print(Fore.GREEN
+                                print(GREEN
                                       + "Correct guess!"
-                                      + Fore.RESET)
+                                      + RESET)
                             else:
-                                print_red("Incorrect guess!")
+                                print(RED + "Incorrect guess!" + RESET)
                                 # Check if the guess is not a duplicate
                                 # or already revealed
                                 if guess not in missed_letters and \
@@ -542,7 +538,7 @@ def main():
 
                         print_header(ascii_img.WELL_DONE)
 
-                        print(Fore.LIGHTCYAN_EX + ascii_img.SAFE + Fore.RESET)
+                        print(CYAN + ascii_img.SAFE + RESET)
 
                         print(FORMATTED_LINE)
 
@@ -550,16 +546,16 @@ def main():
                                                 selected_word, attempts)
                         print()
                         print(
-                            Style.BRIGHT
+                            BOLD
                             + f"You've guessed the hidden {category_name} "
                             + "word that was "
                             + f"{selected_word}."
-                            + Style.RESET_ALL)
+                            + RESET)
                         print()
                         print(
-                            Style.BRIGHT
-                            + Fore.BLUE
-                            + f"YOUR SCORE: {score}" + Style.RESET_ALL)
+                            BOLD_BLUE
+                            + f"YOUR SCORE: {score}"
+                            + RESET)
                         save_score_to_sheet(name, score)
                         print()
 
@@ -569,9 +565,9 @@ def main():
                         print_header(ascii_img.GAME_OVER)
 
                         colored_hangman_stage = (
-                            Fore.RED
+                            RED
                             + ascii_img.HANGMAN[7]
-                            + Fore.RESET)
+                            + RESET)
                         print(colored_hangman_stage)
 
                         print(FORMATTED_LINE)
@@ -580,16 +576,15 @@ def main():
                                                 selected_word, 0)
                         print()
                         print(
-                            Style.BRIGHT
+                            BOLD
                             + f"The hidden {category_name} word was "
                             + f"{selected_word}."
-                            + Style.RESET_ALL)
+                            + RESET)
                         print()
                         print(
-                            Style.BRIGHT
-                            + Fore.BLUE
+                            BOLD_BLUE
                             + f"YOUR SCORE: {score}"
-                            + Style.RESET_ALL)
+                            + RESET)
                         save_score_to_sheet(name, score)
                         print()
 
@@ -598,8 +593,10 @@ def main():
                     else:
                         return
                 else:
-                    print_red("Invalid category choice. "
-                              "Please select a valid option.")
+                    print(RED
+                          + "Invalid category choice. "
+                          "Please select a valid option."
+                          + RESET)
                     time.sleep(FEEDBACK_TIME)
 
         elif choice == "2":
