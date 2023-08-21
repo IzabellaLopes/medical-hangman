@@ -76,15 +76,41 @@ By achieving these project goals, Medical Hangman aims to provide a unique and e
 
 ### Target Audience
 
+Medical Hangman is designed to cater to the following target audience:
+
+- Health Enthusiasts: Individuals with an interest in medical topics and health, can use the game as a tool to refresh and expand their medical vocabulary in a relaxed and enjoyable manner.
+
+- Trivia and Puzzle Lovers: Fans of word-based games, trivia, and puzzles can enjoy a challenging and educational game that combines their passion for language with medical terminology.
+
+- Casual Gamers: Those looking for casual entertainment can enjoy the game as a leisure activity while benefiting from exposure to medical terms.
+
+- Technology Enthusiasts: Individuals interested in programming and technology can explore the codebase and see how different technologies like Google Sheets API and ASCII art can be integrated to create an interactive application.
+
 ### User Requeriments and Expectations
+
+- User Requirements: The primary user requirements for Medical Hangman include a desire to improve medical terminology knowledge, engage in a fun and educational activity, and challenge oneself with word-based games. Users may also have varying levels of familiarity with medical terms, making the game suitable for both beginners and medical professionals seeking to enhance their vocabulary.
+
+- User Expectations: Users can expect an intuitive and interactive game interface that allows them to select medical term categories, guess letters, and receive immediate feedback on their guesses. The game is designed to provide a balance between challenge and enjoyment, encouraging players to test their knowledge while having fun. Users can also anticipate a highscores feature that tracks their performance and motivates improvement with each playthrough. Additionally, users interested in programming can explore the codebase to understand the integration of various technologies.
 
 ### User Stories
 
 #### First Time Visitor Goals
 
+- As a first-time visitor, I want to understand how to play the game and learn about its purpose in relation to medical terminology.
+- I want to explore the different categories available and choose one that interests me the most.
+- I aim to experience an engaging and interactive interface that guides me through the gameplay process.
+
 #### Returning Visitor Goals
 
+- As a returning visitor, I want to challenge myself with new rounds of the game and improve my score in different medical term categories.
+- I wish to continue enjoying the entertaining aspect of the game while reinforcing my medical vocabulary.
+- I look forward to comparing my current highscore with my previous ones and with scores from other players.
+
 #### Frequent Visitor Goals
+
+- As a frequent visitor, I want to explore all the available categories and consistently achieve higher scores.
+- I am excited to see my name on the highscores leaderboard and strive to maintain or improve my position.
+- I aim to share my progress and achievements with friends and colleagues, promoting healthy competition among fellow players.
 
 ### Flow Chart
 
