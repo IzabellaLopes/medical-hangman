@@ -2,6 +2,12 @@
 
 ![Heroku](documentation/home-page.png)
 
+Medical Hangman is a word-guessing game created using Python that aims to exercise your knowledge of medical terms. 
+
+The game is divided into four categories: Bone, Organ, Disease or Condition, and Radiology terms. It was developed with the purpose of combining medical knowledge with new technology skills. 
+
+Whether you're a medical professional looking to test your vocabulary or someone interested in learning medical terminology in a playful manner, this game offers an enjoyable way to do so.
+
 [Medical Hangman Live Page](https://medical-hangman-9035ef835c7a.herokuapp.com/)
 
 
