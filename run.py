@@ -107,12 +107,16 @@ def main_menu():
 
     print_header(ascii_img.WELCOME)
     print(BOLD + ascii_img.MENU_IMAGE + RESET)
-    option_1 = "1. Play"
-    option_2 = "2. How to Play"
-    option_3 = "3. Highscores"
-    print(BOLD_GREEN
-          + f'{option_1 : ^27}{option_2 : ^26}{option_3 : ^27}' + RESET)
+    
+    options = [
+        "1. Play",
+        "2. How to Play",
+        "3. Highscores"
+    ]
+
+    print(BOLD_GREEN + " ".join(option.center(26) for option in options) + RESET)
     print(FORMATTED_LINE)
+    
     choice = input(BOLD + "\nSelect an option: " + RESET)
     valid_choice = ["1", "2", "3"]
 
