@@ -88,6 +88,7 @@ def bottom_input():
     before returning to the menu.
     """
     print(FORMATTED_LINE)
+    print()
     input(BOLD_GREEN
           + "Press ENTER to return to the menu..."
           + RESET)
@@ -183,6 +184,7 @@ def draw_table(scores):
 
     print_header(ascii_img.HIGHSCORES)
 
+    print()
     print_mid("Top 5 Highscores\n")
     print_mid(header_format)
     print_mid("-+" * 25)
