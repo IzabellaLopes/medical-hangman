@@ -1,6 +1,6 @@
 # Medical Hangman
 
-![Heroku](documentation/)
+![Heroku](documentation/home-page.png)
 
 [Medical Hangman Live Page](https://medical-hangman-9035ef835c7a.herokuapp.com/)
 
