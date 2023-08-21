@@ -50,6 +50,26 @@ Whether you're a medical professional looking to test your vocabulary or someone
 
 ## Project Goals
 
+The Medical Hangman project was developed with the following goals in mind:
+
+1. Learn Medical Terminology: Provide a gamified and engaging platform for users to practice and enhance their knowledge of medical terms across various categories such as bones, organs, diseases/conditions, and radiology.
+
+2. Combine Medical Knowledge with Technology: Bridge the gap between medical expertise and technology skills by creating a project that leverages programming to create a fun and educational experience for medical professionals and enthusiasts.
+
+3. Interactive Learning: Offer an interactive and enjoyable way to learn medical terminology by integrating the classic game of Hangman with medical terminology, encouraging players to recall terms, improve their memory, and reinforce their understanding.
+
+4. User-Friendly Interface: Design an intuitive and user-friendly interface that caters to both medical professionals and individuals interested in learning medical terms, making it easy for players to choose categories, input guesses, and navigate through the game.
+
+5. Highscore Tracking: Implement a highscores system that records and displays the top scores achieved by players, encouraging healthy competition and motivating players to improve their performance with each round.
+
+6. Educational Entertainment: Create a project that not only entertains players but also educates them, providing a valuable resource for both medical students looking to strengthen their medical vocabulary and enthusiasts curious about medical terminology.
+
+7. Showcase Technical Skills: Demonstrate programming skills by integrating various Python libraries, working with Google Sheets API for score tracking, and employing ASCII art for visual representation, resulting in a polished and functional application.
+
+8. Customizable and Extensible: Design the project in a modular manner, allowing for easy addition of new categories, terms, and features, thus enabling future expansion and customization.
+
+By achieving these project goals, Medical Hangman aims to provide a unique and enjoyable way for individuals to interact with medical terminology, enhance their vocabulary, and have fun while doing so.
+
 [Back to Contents](#contents)
 
 ## User Experience (UX)
