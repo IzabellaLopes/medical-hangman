@@ -143,6 +143,47 @@ Medical Hangman employs a carefully chosen color scheme to enhance the visual ex
 
 ### Imagery
 
+The visual appeal of Medical Hangman is accentuated by carefully crafted ASCII art imagery. 
+
+- Titles: The titles are generated using the Stick Letters font from the ASCII art generator [patorjk.com](https://patorjk.com/software/taag/#p=display&f=Stick%20Letters&t=WELCOME%20TO%0AMEDICAL%20HANGMAN!), contributing a unique and captivating aesthetic. 
+
+![welcome](documentation/ascii/welcome.png)
+
+![how-to-play](documentation/ascii/how-to-play.png)
+
+![highscores](documentation/ascii/highscores.png)
+
+![categories](documentation/ascii/categories.png)
+
+![medical](documentation/ascii/medical.png)
+
+![well-done](documentation/ascii/well-done.png)
+
+![game-over](documentation/ascii/game-over.png)
+
+
+- Hangman stages: I've added a personal touch to the hangman stages by combining ASCII art generated with the [Electronic font](https://patorjk.com/software/taag/#p=display&h=1&v=1&f=Electronic&t=C) and the [ANSI Regular font](https://patorjk.com/software/taag/#p=display&h=1&v=1&f=ANSI%20Regular&t=e) from Patorjk's ASCII Art Generator. Each stage represents the increasing severity of the poor hangman's fate.
+
+![menu-image](documentation/ascii/menu-image.png)
+
+![hangman-7](documentation/ascii/hangman-7.png)
+
+![hangman-6](documentation/ascii/hangman-6.png)
+
+![hangman-5](documentation/ascii/hangman-5.png)
+
+![hangman-4](documentation/ascii/hangman-4.png)
+
+![hangman-3](documentation/ascii/hangman-3.png)
+
+![hangman-2](documentation/ascii/hangman-2.png)
+
+![hangman-1](documentation/ascii/hangman-1.png)
+
+![hangman-0](documentation/ascii/hangman-0.png)
+
+![safe](documentation/ascii/safe.png)
+
 [Back to Contents](#contents)
 
 ---
