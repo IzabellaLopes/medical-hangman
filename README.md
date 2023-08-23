@@ -29,6 +29,12 @@ Whether you're a medical professional looking to test your vocabulary or someone
     - [Imagery](#imagery)
   - [Features](#features)
     - [Existing Features](#existing-features)
+      - [Favicon](#favicon)
+      - [Game Menu](#game-menu)
+      - [How to Play](#how-to-play)
+      - [Highscores](#highscores)
+      - [Player Name Input](#player-name-input)
+      - [Category Selection](#category-selection)
     - [Future Implementations](#future-implementations)
   - [Technologies Used](#technologies-used)
     - [Languages Used](#languages-used)
@@ -191,6 +197,60 @@ The visual appeal of Medical Hangman is accentuated by carefully crafted ASCII a
 ## Features
 
 ### Existing Features
+
+#### Favicon
+
+The website features a favicon that is visible in the browser tab.
+
+![favicon](documentation/favicon-image.png)
+
+#### Game Menu
+
+The main screen welcomes players to the 'Medical Hangman' game. It features a prominent title accompanied by a formatted line, creatively incorporating a cross to gently emphasize the game's connection with the medical domain. Complementing these elements is an intriguing ASCII art image.
+
+The game starts with a menu with three options:
+
+1. Play: Starts a new game.
+2. How to Play: Displays instructions on how to play the game.
+3. Highscores: Displays the top 5 highscores from previous games.
+
+![Game Menu](documentation/home-page.png)
+
+When a player selects an invalid choice from the game menu, the code displays an error message and prompts the player to choose again until a valid option is provided. This prevents unexpected behavior and maintains a smooth and user-friendly gaming experience.
+
+![Invalid choice](documentation/invalid-choice.png)
+
+#### How to Play
+The "How to Play" section provides instructions on how to play the game, including details about the goal, choosing a category, guessing letters, correct and incorrect guesses, and the game's end conditions.
+
+![How to Play](documentation/how-to-play-page.png)
+
+#### Highscores
+The "Highscores" section displays the top 5 highscores achieved by players in previous games. It lists the player names and their scores. Data is retrieved from the 'highscores' Google Sheets and sorted in descending order.
+
+![Highscores](documentation/highscores-page.png)
+
+#### Player Name Input
+The game allows players to enter their name before starting a new game. The input is carefully validated to ensure it consists solely of letters. If the input is correct, the game proceeds as intended, ensuring a smooth and error-free experience for the player.
+
+![Player name](documentation/player-name.png)
+
+If the player's input doesn't meet this requirement, the code generates informative error messages. For instance:
+- If the player enters an empty name, a message notifies them that a name must be provided.
+![Empty name](documentation/empty-name.png)
+
+- If the name includes non-letter characters, a message instructs the player to use only letters for their name.
+
+![Non letter name](documentation/non-letters-name.png)
+
+#### Category Selection
+This page begins by warmly welcoming the player with their name. After a brief pause for feedback, the available medical word categories are presented. The player is then given the opportunity to select a category from the following options: Bone, Organ, Disease or Condition, and Radiology. The categories are visibly displayed, and the player can input the associated number to make their category selection and initiate the game.
+
+![Categories page](documentation/categories-page.png)
+
+If an invalid category selection is made, the system displays an error message to inform the player about the issue. This helps guide the player towards making a valid choice from the available medical word categories.
+
+![Invalid category](documentation/invalid-category.png)
 
 
 
