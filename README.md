@@ -27,6 +27,7 @@ Whether you're a medical professional looking to test your vocabulary or someone
   - [Design](#design)
     - [Color Scheme](#color-scheme)
     - [Imagery](#imagery)
+  - [Google Sheets Integration](#google-sheets-integration)
   - [Features](#features)
     - [Existing Features](#existing-features)
       - [Favicon](#favicon)
@@ -194,6 +195,14 @@ The visual appeal of Medical Hangman is accentuated by carefully crafted ASCII a
 ![hangman-0](documentation/ascii/hangman-0.png)
 
 ![safe](documentation/ascii/safe.png)
+
+[Back to Contents](#contents)
+
+---
+
+## Google Sheets Integration
+
+Utilize the ['medical_hangman'](https://docs.google.com/spreadsheets/d/1a13xeQ8T7SavpKMjG5aR-Er4OXXsyd4ns8axhWKPYYA/edit?usp=sharing) Google Sheet to seamlessly import data into the Medical Hangman game. The 'word_list' worksheet, organized into four columns representing different categories, serves as the source of words for the game. Additionally, the 'highscores' sheet is employed to store and display player highscore data, enhancing the competitive aspect of the game.
 
 [Back to Contents](#contents)
 
