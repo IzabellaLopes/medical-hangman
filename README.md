@@ -280,9 +280,8 @@ During gameplay, the player is presented with a hangman image representing the n
 - Incorrect guess:
 ![Incorrect](documentation/incorrect.png)
 
-
-
 #### End of Game
+
 When the game ends, either due to the player guessing the word correctly or running out of attempts, the game provides feedback on the outcome and displays the player's score.
 
 Subsequently, a prompt emerges: "Would you like to play again?" Please enter 'y' for yes, 'n' for no, or 'h' to see the highscores.
@@ -292,6 +291,7 @@ Subsequently, a prompt emerges: "Would you like to play again?" Please enter 'y'
 ![Game over page](documentation/game-over-page.png)
 
 #### Score Calculation
+
 In the Medical Hangman game, the player's score is determined based on various factors, including their performance and speed during the game. The scoring formula takes into account the length of the word, the number of incorrect guesses, and the time taken to complete the game. Here's how the score is calculated:
 
 - Base Score Calculation:
@@ -327,10 +327,16 @@ After each game, the player is given the option to play again, view highscores, 
 
 ### Future Implementations
 
+- Whole Word Guess: 
+  - Incorporate a feature that allows players to guess the entire hidden word at once. This addition will provide an alternative gameplay strategy and enhance the player experience.
+- Difficulty Levels: 
+  - Implement difficulty levels that adjust the maximum number of attempts based on the selected difficulty.
 
 [Back to Contents](#contents)
 
 ---
+
+
 
 ## Technologies Used
 
