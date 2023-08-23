@@ -35,6 +35,11 @@ Whether you're a medical professional looking to test your vocabulary or someone
       - [Highscores](#highscores)
       - [Player Name Input](#player-name-input)
       - [Category Selection](#category-selection)
+      - [Gameplay](#gameplay)
+      - [End of Game](#end-of-game)
+      - [Score Calculation](#score-calculation)
+      - [Highscore Submission](#highscore-submission)
+      - [Game Over Handling](#game-over-handling)
     - [Future Implementations](#future-implementations)
   - [Technologies Used](#technologies-used)
     - [Languages Used](#languages-used)
@@ -221,16 +226,19 @@ When a player selects an invalid choice from the game menu, the code displays an
 ![Invalid choice](documentation/invalid-choice.png)
 
 #### How to Play
+
 The "How to Play" section provides instructions on how to play the game, including details about the goal, choosing a category, guessing letters, correct and incorrect guesses, and the game's end conditions.
 
 ![How to Play](documentation/how-to-play-page.png)
 
 #### Highscores
+
 The "Highscores" section displays the top 5 highscores achieved by players in previous games. It lists the player names and their scores. Data is retrieved from the 'highscores' Google Sheets and sorted in descending order.
 
 ![Highscores](documentation/highscores-page.png)
 
 #### Player Name Input
+
 The game allows players to enter their name before starting a new game. The input is carefully validated to ensure it consists solely of letters. If the input is correct, the game proceeds as intended, ensuring a smooth and error-free experience for the player.
 
 ![Player name](documentation/player-name.png)
@@ -244,6 +252,7 @@ If the player's input doesn't meet this requirement, the code generates informat
 ![Non letter name](documentation/non-letters-name.png)
 
 #### Category Selection
+
 This page begins by warmly welcoming the player with their name. After a brief pause for feedback, the available medical word categories are presented. The player is then given the opportunity to select a category from the following options: Bone, Organ, Disease or Condition, and Radiology. The categories are visibly displayed, and the player can input the associated number to make their category selection and initiate the game.
 
 ![Categories page](documentation/categories-page.png)
@@ -252,7 +261,69 @@ If an invalid category selection is made, the system displays an error message t
 
 ![Invalid category](documentation/invalid-category.png)
 
+#### Gameplay
 
+During gameplay, the player is presented with a hangman image representing the number of incorrect guesses. The hidden word, which is formatted with underscores and spaces, is displayed, along with missed letters. The game supports multiple rounds where players can choose from four medical categories: Bone, Organ, Disease or Condition, and Radiology. Players must guess letters to uncover the hidden medical term, one letter at a time. Correct guesses reveal letters in the word, while incorrect guesses result in the progression of a hangman figure. A limit of 7 incorrect guesses is set before the game ends. Players are given a score based on their performance, considering word length, remaining lives, and time taken.
+
+- Well done:
+![Well done](documentation/game-1.gif)
+
+- Game over:
+![Game Over](documentation/game-2.gif)
+
+- You've already guessed that letter:
+![Already](documentation/already.png)
+
+- Correct guess:
+![Correct](documentation/correct.png)
+
+- Incorrect guess:
+![Incorrect](documentation/incorrect.png)
+
+
+
+#### End of Game
+When the game ends, either due to the player guessing the word correctly or running out of attempts, the game provides feedback on the outcome and displays the player's score.
+
+Subsequently, a prompt emerges: "Would you like to play again?" Please enter 'y' for yes, 'n' for no, or 'h' to see the highscores.
+
+![Well done page](documentation/well-done-page.png)
+
+![Game over page](documentation/game-over-page.png)
+
+#### Score Calculation
+In the Medical Hangman game, the player's score is determined based on various factors, including their performance and speed during the game. The scoring formula takes into account the length of the word, the number of incorrect guesses, and the time taken to complete the game. Here's how the score is calculated:
+
+- Base Score Calculation:
+  - The base score is calculated using the following formula:
+  - Base Score = (Word Length * 500) + (Incorrect Guesses * 1000)
+  - Word Length: The length of the word in the game's selected category (BONE, ORGAN, DISEASE OR CONDITION, or RADIOLOGY).
+  - Incorrect Guesses: The number of incorrect letter guesses made during the game.
+
+- Time Factor:
+  - The time factor adjusts the base score based on the time taken to complete the game. The formula for calculating the time factor is as follows:
+  - Time Factor = max(1, 10 - Time (seconds) // 10)
+  - Time (seconds): The time taken to complete the game in seconds.
+
+- Final Score:
+  - The final score is calculated by dividing the base score by the time factor and rounding up:
+  - Final Score = ceil(Base Score / Time Factor)
+  - The calculated final score is an indicator of the player's performance in the game. A higher score reflects quicker and more accurate guesses, while a lower score might indicate longer playtime and a higher number of incorrect guesses.
+
+- Saving Highscores:
+  - After completing a game, the player's name and final score are recorded in the highscores table. The top 5 scores are displayed in the highscores section of the game.
+
+![Calculate score](documentation/calculate_score.png)
+
+#### Highscore Submission
+
+After the game ends, the player's score is saved to a [Google Sheets](https://docs.google.com/spreadsheets/d/1a13xeQ8T7SavpKMjG5aR-Er4OXXsyd4ns8axhWKPYYA/edit?usp=sharing) document containing highscores.
+
+#### Game Over Handling
+
+After each game, the player is given the option to play again, view highscores, or exit the game.
+
+![Game Over Handling](documentation/play-again.png)
 
 ### Future Implementations
 
