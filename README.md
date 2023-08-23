@@ -45,6 +45,7 @@ Whether you're a medical professional looking to test your vocabulary or someone
   - [Technologies Used](#technologies-used)
     - [Languages Used](#languages-used)
     - [Frameworks, Libraries \& Programs Used](#frameworks-libraries--programs-used)
+    - [Modules Imported](#modules-imported)
   - [Testing](#testing)
     - [Bugs](#bugs)
   - [Deployment](#deployment)
@@ -345,15 +346,55 @@ After each game, the player is given the option to play again, view highscores, 
 
 ---
 
-
-
 ## Technologies Used
 
 ### Languages Used
 
-Python
+The primary language employed in this project is [Python](https://www.python.org/). The code for this project can be found [here](https://github.com/IzabellaLopes/medical-hangman/blob/main/run.py).
 
 ### Frameworks, Libraries & Programs Used
+
+- [VS Code](https://code.visualstudio.com/) - IDE used to create the Medical Hangman game.
+
+- [Lucidchart](https://www.lucidchart.com/) - Used to create flowcharts.
+
+- [Github](https://github.com/) - Used for file storage, version control, and hosting page assets.
+
+- [Code Institute Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) - Served as the foundational structure for this project.
+
+- [Google Sheets](https://www.google.co.uk/sheets/about/) - Data source for words and player highscores.
+
+- [Code Institute Python Linter](https://pep8ci.herokuapp.com/) - Verify code conformity with PEP8.
+
+- [Pylance Validator](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)
+  
+- [Heroku](https://www.heroku.com/) - Used to deploy the project.
+
+- [TinyPNG](https://tinypng.com/) - To compress images
+
+- [Ezgif](https://ezgif.com/video-to-gif/) - To convert video to gif to include in the Readme.md.
+
+- [Favicon.io](https://favicon.io/) - To create favicon.
+
+- [Chat-GPT](https://chat.openai.com/) - Enhance Readme.md readability; streamline content for effective communication.
+    
+### Modules Imported
+
+- [os](https://docs.python.org/3/library/os.html) - Provides functions for interacting with the operating system. Used for its `clear` tool, to clear the terminal window.
+  
+- [time](https://docs.python.org/3/library/time.html) - Offers functions to work with time-related tasks. Used to calculate the time taken to complete the game.
+  
+- [math](https://docs.python.org/3/library/math.html) - Allows mathematical operations and functions to be used in the code. Used for floor and ceiling rounding of variables.
+  
+- [gspread](https://docs.gspread.org/en/v5.10.0/) - Enables interaction with Google Sheets for spreadsheet operations.
+  
+- [google.oauth2.service_account.Credentials](https://google-auth.readthedocs.io/en/master/reference/google.oauth2.service_account.html) - Provides authentication credentials for Google services.
+  
+- [random](https://docs.python.org/3/library/random.html) - Used to randomly select the word for the game.
+  
+- [colorama.init, Fore, Style](https://pypi.org/project/colorama/) - Enhances console output with colored text and styles.
+  
+- [ascii_img](https://patorjk.com/software/taag/#p=display&f=Stick%20Letters&t=WELCOME%20TO%0AMEDICAL%20HANGMAN!): Used to create ASCII art.
 
 [Back to Contents](#contents)
 
