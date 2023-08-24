@@ -434,7 +434,7 @@ def handle_game_over():
     see highscores, or exit.
     """
     while True:
-        print(BOLD_GREEN + "Would you like to play again?\n" + RESET)
+        print(BOLD_GREEN + "Would you like to play again?" + RESET)
         play_again = input(BOLD_GREEN
                            + "Please enter 'y' for yes, 'n' for no, "
                            "or 'h' to see the highscores: "
@@ -489,7 +489,6 @@ def display_game_result(result, category_name,
     score = calculate_score(start_time, time.time(), selected_word, attempts)
     seconds = math.floor(time.time() - start_time)
 
-    print()
     print(BOLD
           + f"You've {result} the hidden {category_name} word that was "
           f"{selected_word}."
@@ -497,9 +496,9 @@ def display_game_result(result, category_name,
     print()
     print(BOLD_BLUE + f"FINAL SCORE: {score}")
     print("Your score is calculated based on the following factors:")
-    print(f"* Word Length: {calculate_word_length(selected_word)}")
-    print(f"* Number of Incorrect Guesses: {7 - attempts}")
-    print(f"* Completion Time: {seconds} seconds")
+    print(f"* Word Length: {calculate_word_length(selected_word)} / "
+          f"* Number of Incorrect Guesses: {7 - attempts} / " 
+          f"* Completion Time: {seconds} seconds")
     print("A higher score means you did well by guessing "
           "accurately and quickly.")
     print(Style.RESET_ALL)
