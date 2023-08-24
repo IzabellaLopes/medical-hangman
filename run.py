@@ -495,10 +495,10 @@ def display_game_result(result, category_name,
           + RESET)
     print()
     print(BOLD_BLUE + f"FINAL SCORE: {score}")
-    print("Your score is calculated based on the following factors:")
-    print(f"* Word Length: {calculate_word_length(selected_word)} / "
-          f"* Number of Incorrect Guesses: {7 - attempts} / " 
-          f"* Completion Time: {seconds} seconds")
+    print("Factors considered for your score:")
+    print(f"Word Length: {calculate_word_length(selected_word)} / "
+          f"Number of Incorrect Guesses: {7 - attempts} / " 
+          f"Completion Time: {seconds}s")
     print("A higher score means you did well by guessing "
           "accurately and quickly.")
     print(Style.RESET_ALL)
