@@ -49,10 +49,11 @@ Whether you're a medical professional looking to test your vocabulary or someone
   - [Testing](#testing)
     - [Bugs](#bugs)
   - [Deployment](#deployment)
-    - [Deploying on Heroku](#deploying-on-heroku)
-    - [Fork The Repository](#fork-the-repository)
-    - [Clone The Repository](#clone-the-repository)
-    - [Run The Repository Locally](#run-the-repository-locally)
+    - [Code Institute Python Essentials Template](#code-institute-python-essentials-template)
+    - [Deployment process](#deployment-process)
+    - [Local Development](#local-development)
+      - [How to Fork](#how-to-fork)
+      - [How to Clone](#how-to-clone)
   - [Credits](#credits)
     - [Code](#code)
     - [Content](#content)
@@ -416,51 +417,79 @@ Please refer to [TESTING.md](TESTING.md) file for a comprehensive overview of al
 
 ## Deployment 
 
-Code Institute Python Essentials Template for creating a terminal UI where the python code will generate its output to the user. 
+The website has been successfully deployed on Heroku. You can access the live site [here](https://medical-hangman-9035ef835c7a.herokuapp.com/).
 
-Steps to reproduce:
+### Code Institute Python Essentials Template 
 
-1. Visit the [Code Institute Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) and select use this template.
-2. Select create a new repository.
+To create a terminal-based user interface using the Code Institute Python Essentials Template and display Python code output:
 
-### Deploying on Heroku
+1. Go to the [Code Institute Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) and click on "Use this template."
+2. Choose "Create a new repository."
 
-1. Create a Heroku account. 
-2. Sign up with a student account for credits. (optional)
-3. Once logged in, select create a new app.
-4. Select an app name and region.
-5. Select deployment method as connect to github.
-6. Find the repo containing the python code created with the CI template and connect it.
-7. Enable automatic deploys and select the main branch
-8. In the settings tab select reveal config vars. Input the required hidden variables.
-9. For this project a creds.json and RAPID_API_HOST, RAPID_API_KEY were created as config vars.
-10. Select nodejs and python as the buildpack.
-11. Deploy.
+### Deployment process
 
-### Fork The Repository
+1. GitHub Setup
+   - Log in to [Github](https://github.com/).
+   - Access the repository for deployment. The repository for the website can be found [here](https://github.com/IzabellaLopes/medical-hangman).
 
-1. Go to the GitHub repository
-2. Click on Fork button in the upper right-hand corner
-3. Edit the repository name and description if desired
+2. Heroku Setup
+   - Log in to [Heroku](https://www.heroku.com/). 
+   - Click the "New" button in the top right corner.
+   - Select "Create New App."
+   - Provide a name for the app (medical-hangman) and choose a region (Europe).
+   - Click the "Create app" button.
+   - Navigate to the "Deploy" section in the navigation bar. Under "Deployment Method," choose GitHub/Connect to GitHub.
+   - In the "Connect to GitHub" section, enter the repository name (medical-hangman) and click the search button.
+   - Once the repository link appears in the search results, click the "Connect" button.
+    ![App information](documentation/app-information.png)
+
+  
+3. Google Sheets and Credentials Setup
+   - Duplicate the Google Sheet for this game by going to File > Make a copy [here](https://docs.google.com/spreadsheets/d/1a13xeQ8T7SavpKMjG5aR-Er4OXXsyd4ns8axhWKPYYA/edit?usp=sharing).
+   - Create a new project on the [Google Could Platform](https://console.cloud.google.com/projectcreate).
+   - Activate the [Google Drive API](https://console.cloud.google.com/apis/library/drive.googleapis.com).
+   - Generate credentials for accessing **Application Data** [here](https://console.cloud.google.com/apis/credentials/wizard?api=drive.googleapis.com).
+   - Grant permissions of **Basic > Editor**.
+   - Create new service account keys (type: JSON).
+   - Copy the email address from the **Service Accounts** section and add it as an **Editor** to your duplicated copy of the Google Sheet.
+   - Enable the [Google Sheets API](https://console.cloud.google.com/apis/library/sheets.googleapis.com).
+  
+4. Heroku Configuration Variables (Config Vars)
+   - Download your key file and return to your [Heroku Dashboard](https://dashboard.heroku.com/apps) to select your app.
+   - Under Settings, find **Config Vars** and add the following:
+  
+  ![Config Vars](documentation/vars.png)
+
+5. Buildpacks and Deployment
+   - Go to Settings in the nav bar and select "Add Buildpacks."
+   - Add `Python` and save. Then add `Node.js`, ensuring that Python is listed first.
+  ![Buildpacks](documentation/buildpacks.png)
+
+   - Once the Config Vars are set, click Deploy. 
+   - Choose either Manual or Automatic deployment. Automatic deployment updates the site automatically with your GitHub commits. Ensure that "Branch to deploy" is set to the main branch.
+   - Finally, click the "Deploy" button to make the website go live.
+
+### Local Development
+
+#### How to Fork
+
+To fork the repository:
+
+1. Login (or signup) to GitHub account.
+2. Go to the repository for this project, [IzabellaLopes/medical-hangman](https://github.com/IzabellaLopes/medical-hangman).
+3. Click the Fork button in the top right corner.
+4. Edit the repository name and description if desired
 4. Click the green create fork button
 
-### Clone The Repository
+#### How to Clone
 
-1. Go to the GitHub repository
-2. Locate the green Code button above the list of files and click it
-3. Select if you prefer to clone using HTTPS, SSH, or Github CLI and click the copy button to copy the URL to your clipboard
-4. Open Git Bash
-5. Change the current working directory to the one where you want the cloned directory
-6. Type git clone and paste the URL from the clipboard ($ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
-7. Press Enter to create your local clone.
+To clone the repository:
 
-### Run The Repository Locally
-
-1. Go to the GitHub repository
-2. Locate the green Code button above the list of files and click it
-3. From the dropdown menu select download Zip.
-4. Download and open the zip file to run in an editor
-
+1. Login (or signup) to GitHub account.
+2. Go to the repository for this project, [IzabellaLopes/medical-hangman](https://github.com/IzabellaLopes/medical-hangman).
+3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
+4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
+5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
 
 
 ## Credits
