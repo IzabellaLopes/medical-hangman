@@ -550,6 +550,9 @@ def main():
 
                         score = calculate_score(start_time, time.time(),
                                                 selected_word, attempts)
+                        
+                        seconds = math.floor(time.time() - start_time)  # Define 'seconds' here
+
                         print()
                         print(
                             BOLD
@@ -560,10 +563,14 @@ def main():
                         print()
                         print(
                             BOLD_BLUE
-                            + f"YOUR SCORE: {score}"
-                            + RESET)
+                            + f"FINAL SCORE: {score}")
+                        print("Your score is calculated based on the following factors:")
+                        print(f"* Word Length: {calculate_word_length(selected_word)}")
+                        print(f"* Number of Incorrect Guesses: {7 - attempts}")
+                        print(f"* Completion Time: {seconds} seconds")
+                        print("A higher score means you did well by guessing accurately and quickly.")
+                        print(Style.RESET_ALL)
                         save_score_to_sheet(name, score)
-                        print()
 
                     elif attempts == 0:
                         clear_terminal()
@@ -580,6 +587,9 @@ def main():
 
                         score = calculate_score(start_time, time.time(),
                                                 selected_word, 0)
+                        
+                        seconds = math.floor(time.time() - start_time)  # Define 'seconds' here
+
                         print()
                         print(
                             BOLD
@@ -589,10 +599,14 @@ def main():
                         print()
                         print(
                             BOLD_BLUE
-                            + f"YOUR SCORE: {score}"
-                            + RESET)
+                            + f"FINAL SCORE: {score}")
+                        print("Your score is calculated based on the following factors:")
+                        print(f"* Word Length: {calculate_word_length(selected_word)}")
+                        print(f"* Number of Incorrect Guesses: {7 - attempts}")
+                        print(f"* Completion Time: {seconds} seconds")
+                        print("A higher score means you did well by guessing accurately and quickly.")
+                        print(Style.RESET_ALL)
                         save_score_to_sheet(name, score)
-                        print()
 
                     if handle_game_over():
                         continue
