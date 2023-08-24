@@ -14,6 +14,7 @@
   - [AUTOMATED TESTING](#automated-testing)
     - [CI Python Linter](#ci-python-linter)
     - [W3C Validator](#w3c-validator)
+    - [Lighthouse](#lighthouse)
 
 To ensure the accuracy, readability, and adherence to coding standards of the Medical Hangman Game, a rigorous validation process was conducted. By integrating the CI Python Linter into the development pipeline, I automated the assessment of my code for syntax errors, style inconsistencies, and other potential problems. This proactive approach aimed to identify and address issues early in development, minimizing the risk of bugs reaching the final product.
 
@@ -33,9 +34,15 @@ The Medical Hangman game has been thoroughly tested using the CI Python Linter, 
 
 ### W3C Validator
 
-- HTML: No errors were returned when passing through the official [W3C validator](https://validator.w3.org/).
+The validation for layout.html shows no errors when passing through the official [W3C validator](https://validator.w3.org/).
 
-  - Medical Hangman ![Medical Hangman](testing/w3c.png)
+- **W3C Validator**
+![W3C](testing/w3c.png)
 
+### Lighthouse
 
+I utilized Lighthouse, a tool available in the Chrome Developer Tools, to assess the performance, accessibility, best practices, and SEO aspects of the website.
+
+- **Lighthouse**
+![Lighthouse](testing/lighthouse.png)
 
