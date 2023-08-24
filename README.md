@@ -372,7 +372,7 @@ The primary language employed in this project is [Python](https://www.python.org
 
 - [TinyPNG](https://tinypng.com/) - To compress images
 
-- [Ezgif](https://ezgif.com/video-to-gif/) - To convert video to gif to include in the Readme.md.
+- [CloudConvert](https://cloudconvert.com/) - To transform a video into a GIF for inclusion in the Readme.md file.
 
 - [Favicon.io](https://favicon.io/) - To create favicon.
 
