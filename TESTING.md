@@ -13,6 +13,7 @@
   - [CONTENTS](#contents)
   - [AUTOMATED TESTING](#automated-testing)
     - [CI Python Linter](#ci-python-linter)
+    - [W3C Validator](#w3c-validator)
 
 To ensure the accuracy, readability, and adherence to coding standards of the Medical Hangman Game, a rigorous validation process was conducted. By integrating the CI Python Linter into the development pipeline, I automated the assessment of my code for syntax errors, style inconsistencies, and other potential problems. This proactive approach aimed to identify and address issues early in development, minimizing the risk of bugs reaching the final product.
 
@@ -29,3 +30,12 @@ The Medical Hangman game has been thoroughly tested using the CI Python Linter, 
 
 - **ascii_img.py**
 ![CI Linter - ascii.py](testing/pep8-ascii.png)
+
+### W3C Validator
+
+- HTML: No errors were returned when passing through the official [W3C validator](https://validator.w3.org/).
+
+  - Medical Hangman ![Medical Hangman](testing/w3c.png)
+
+
+
