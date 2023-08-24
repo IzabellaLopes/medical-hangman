@@ -128,6 +128,10 @@ Medical Hangman is designed to cater to the following target audience:
 
 ### Flow Chart
 
+[LucidChart](https://www.lucidchart.com/pages/) was used for designing the program's flow.
+
+![Lucid](documentation/lucid.png)
+
 [Back to Contents](#contents)
 
 ---
