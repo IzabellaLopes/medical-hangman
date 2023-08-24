@@ -57,7 +57,7 @@ I utilized Lighthouse, a tool available in the Chrome Developer Tools, to assess
 
 `First Time Visitors`
 
-| Goals                                                                                                                                                        | How are they achieved?                                                                                                                                                                                                             |
+| **GOALS** | **HOW ARE THEY ACHIEVED?**|
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | To gain a clear understanding of how the game is played and its connection to medical terminology. | Navigate to the "How to Play" section to receive step-by-step instructions on playing the Medical Hangman Game. You'll find a detailed breakdown of gameplay mechanics, such as choosing categories, making guesses, and progressing through the game. |
 | The opportunity to explore and select from various available categories that align with your interests. | When you begin, you'll be prompted to select a category that intrigues you the most. The game provides options like "BONE," "ORGAN," "DISEASE OR CONDITION," and "RADIOLOGY." This variety ensures a tailored experience that aligns with your medical interests.|
@@ -65,7 +65,7 @@ I utilized Lighthouse, a tool available in the Chrome Developer Tools, to assess
 
 `Returning Visitors`
 
-| Goals                                                                                                                                                        | How are they achieved?                                                                                                                                                                                                             |
+| **GOALS** | **HOW ARE THEY ACHIEVED?**|
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Challenge Yourself: Engage in new game rounds to enhance scores across medical term categories. | Challenge: Select varied categories to test skills and adapt guessing strategies. |
 | Enjoy and Learn: Continue enjoying game entertainment while reinforcing medical vocabulary. | Enjoyment: Immersive gameplay with engaging visuals enriches medical vocabulary.|
@@ -73,7 +73,7 @@ I utilized Lighthouse, a tool available in the Chrome Developer Tools, to assess
 
 `Frequent Visitors`
 
-| Goals                                                                                                                                                        | How are they achieved?                                                                                                                                                                                                             |
+| **GOALS** | **HOW ARE THEY ACHIEVED?**|
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Exploration and Mastery | Delve into diverse categories, aiming for better scores with each visit. |
 | Leaderboard Recognition | Attain a spot on the highscores leaderboard, working to sustain or enhance rankings.|

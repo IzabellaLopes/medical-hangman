@@ -128,7 +128,7 @@ Medical Hangman is designed to cater to the following target audience:
 
 ### Flow Chart
 
-[LucidChart](https://www.lucidchart.com/pages/) was used for designing the program's flow.
+[Lucidchart](https://www.lucidchart.com/pages/) was used for designing the program's flow.
 
 ![Lucid](documentation/lucid.png)
 
@@ -411,9 +411,10 @@ Please refer to [TESTING.md](TESTING.md) file for a comprehensive overview of al
 
 ### Bugs
 
-| **Bug** | **Fix** |
-| ------- | ------- |
-
+| **BUG** | **DESCRIBE THE BUG**  | **HOW I SOLVED**|
+| ------- | ------- | ------- |
+| Incorrect interpretation of spaces between words | The bug involved an incorrect interpretation of spaces between words in the create_hidden_word function, resulting in an unbroken string of underscores | The bug was resolved by adopting a new approach in the create_hidden_word function. This revised method utilizes the join function and a list comprehension to individually process each character of the word. This approach accurately manages spaces between words. When a character is not a space, an underscore is inserted; when a character is a space, it remains unchanged as a space. Consequently, this updated strategy ensures accurate handling of spaces between words, enabling the proper separation of words with spaces or representation by underscores as required |
+| Terminal Display Accumulates Blank Lines When Switching Screens | When switching between screens in the Python hangman game, a new blank line was being added with each screen change, resulting in the accumulation of empty lines and increasing the terminal's size | The issue was resolved by replacing the existing clear_terminal() to os.system('cls' if os.name == 'nt' else "printf '\033c'"). This prevented the accumulation of blank lines, ensuring effective terminal screen clearing. |
 
 [Back to Contents](#contents)
 
