@@ -106,16 +106,18 @@ def main_menu():
 
     print_header(ascii_img.WELCOME)
     print(BOLD + ascii_img.MENU_IMAGE + RESET)
-    
+
     options = [
         "1. Play",
         "2. How to Play",
         "3. Highscores"
     ]
 
-    print(BOLD_GREEN + " ".join(option.center(26) for option in options) + RESET)
+    print(BOLD_GREEN
+          + " ".join(option.center(26) for option in options)
+          + RESET)
     print(FORMATTED_LINE)
-    
+
     choice = input(BOLD + "\nSelect an option: " + RESET)
     valid_choice = ["1", "2", "3"]
 
@@ -454,7 +456,54 @@ def handle_game_over():
                   "'n' to exit, or 'h' to see highscores."
                   + RESET)
 
-# Main Game logic
+
+def display_game_result(result, category_name,
+                        selected_word, attempts, start_time, name):
+    """
+    Display the game result to the player based on whether they won or lost.
+
+    Parameters:
+        result (str): The result of the game, either "won" or "lost".
+        category_name (str): The name of the chosen category.
+        selected_word (str): The word that was selected for the game.
+        attempts (int): The number of attempts the player had.
+        start_time (float): The start time of the game.
+        name (str): The name of the player.
+
+    The function calculates and displays the player's score, final word,
+    number of incorrect guesses, completion time, and provides feedback
+    about the result of the game.
+    """
+    clear_terminal()
+
+    if result == "won":
+        print_header(ascii_img.WELL_DONE)
+        colored_image = CYAN + ascii_img.SAFE + RESET
+    else:
+        print_header(ascii_img.GAME_OVER)
+        colored_image = RED + ascii_img.HANGMAN[7] + RESET
+
+    print(colored_image)
+    print(FORMATTED_LINE)
+
+    score = calculate_score(start_time, time.time(), selected_word, attempts)
+    seconds = math.floor(time.time() - start_time)
+
+    print()
+    print(BOLD
+          + f"You've {result} the hidden {category_name} word that was "
+          f"{selected_word}."
+          + RESET)
+    print()
+    print(BOLD_BLUE + f"FINAL SCORE: {score}")
+    print("Your score is calculated based on the following factors:")
+    print(f"* Word Length: {calculate_word_length(selected_word)}")
+    print(f"* Number of Incorrect Guesses: {7 - attempts}")
+    print(f"* Completion Time: {seconds} seconds")
+    print("A higher score means you did well by guessing "
+          "accurately and quickly.")
+    print(Style.RESET_ALL)
+    save_score_to_sheet(name, score)
 
 
 def main():
@@ -497,6 +546,7 @@ def main():
 
                     attempts = 7  # Maximum number of attempts
                     hangman_stage = 7 - attempts
+                    start_time = time.time()
 
                     update_game_display(
                             hidden_word,
@@ -540,73 +590,19 @@ def main():
 
                     # Check for game over conditions
                     if '_' not in hidden_word:
-                        clear_terminal()
-
-                        print_header(ascii_img.WELL_DONE)
-
-                        print(CYAN + ascii_img.SAFE + RESET)
-
-                        print(FORMATTED_LINE)
-
-                        score = calculate_score(start_time, time.time(),
-                                                selected_word, attempts)
-                        
-                        seconds = math.floor(time.time() - start_time)  # Define 'seconds' here
-
-                        print()
-                        print(
-                            BOLD
-                            + f"You've guessed the hidden {category_name} "
-                            + "word that was "
-                            + f"{selected_word}."
-                            + RESET)
-                        print()
-                        print(
-                            BOLD_BLUE
-                            + f"FINAL SCORE: {score}")
-                        print("Your score is calculated based on the following factors:")
-                        print(f"* Word Length: {calculate_word_length(selected_word)}")
-                        print(f"* Number of Incorrect Guesses: {7 - attempts}")
-                        print(f"* Completion Time: {seconds} seconds")
-                        print("A higher score means you did well by guessing accurately and quickly.")
-                        print(Style.RESET_ALL)
-                        save_score_to_sheet(name, score)
-
+                        display_game_result("won",
+                                            category_name,
+                                            selected_word,
+                                            attempts,
+                                            start_time,
+                                            name)
                     elif attempts == 0:
-                        clear_terminal()
-
-                        print_header(ascii_img.GAME_OVER)
-
-                        colored_hangman_stage = (
-                            RED
-                            + ascii_img.HANGMAN[7]
-                            + RESET)
-                        print(colored_hangman_stage)
-
-                        print(FORMATTED_LINE)
-
-                        score = calculate_score(start_time, time.time(),
-                                                selected_word, 0)
-                        
-                        seconds = math.floor(time.time() - start_time)  # Define 'seconds' here
-
-                        print()
-                        print(
-                            BOLD
-                            + f"The hidden {category_name} word was "
-                            + f"{selected_word}."
-                            + RESET)
-                        print()
-                        print(
-                            BOLD_BLUE
-                            + f"FINAL SCORE: {score}")
-                        print("Your score is calculated based on the following factors:")
-                        print(f"* Word Length: {calculate_word_length(selected_word)}")
-                        print(f"* Number of Incorrect Guesses: {7 - attempts}")
-                        print(f"* Completion Time: {seconds} seconds")
-                        print("A higher score means you did well by guessing accurately and quickly.")
-                        print(Style.RESET_ALL)
-                        save_score_to_sheet(name, score)
+                        display_game_result("lost",
+                                            category_name,
+                                            selected_word,
+                                            attempts,
+                                            start_time,
+                                            name)
 
                     if handle_game_over():
                         continue
