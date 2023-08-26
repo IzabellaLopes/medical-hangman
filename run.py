@@ -266,6 +266,14 @@ def player_name():
 def choose_category(name, categories):
     """
     Display available categories and let the player choose one.
+    
+    Args:
+        name (str): The player's name.
+        categories (list of tuple): A list of tuples where each tuple contains
+            the name of a category and its corresponding number.
+
+    Returns:
+        str: The selected category's number as a string.
     """
     clear_terminal()
 
