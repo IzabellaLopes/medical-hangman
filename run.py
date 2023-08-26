@@ -1,3 +1,7 @@
+'''
+Medical Hangman - A Python terminal game developed by Izabella Lopes.
+'''
+
 # Imports
 import os
 import time
@@ -8,9 +12,10 @@ import random
 from colorama import init, Fore, Style
 import ascii_img
 
-# Colorama
+# Colorama initialization
 init()
 
+# Terminal styling constants
 BOLD = Style.BRIGHT
 BOLD_GREEN = Style.BRIGHT + Fore.LIGHTGREEN_EX
 GREEN = Fore.LIGHTGREEN_EX
@@ -21,7 +26,7 @@ YELLOW = Fore.YELLOW
 CYAN = Fore.LIGHTCYAN_EX
 RESET = Style.RESET_ALL
 
-# Constants
+# Other constants
 TERMINAL_WIDTH = 80
 FEEDBACK_TIME = 1.5
 HANGMAN_STAGES = 7
@@ -46,11 +51,11 @@ SHEET = GSPREAD_CLIENT.open('medical_hangman')
 # Open the 'highscores' Google Sheets
 SCORE_SHEET = SHEET.worksheet('highscores')
 
-# Game Variables
+# Game variables
 missed_letters = []
 start_time = time.time()
 
-# Utility Functions
+# Utility functions
 
 
 def clear_terminal():
@@ -266,7 +271,7 @@ def player_name():
 def choose_category(name, categories):
     """
     Display available categories and let the player choose one.
-    
+
     Args:
         name (str): The player's name.
         categories (list of tuple): A list of tuples where each tuple contains
@@ -347,7 +352,7 @@ def create_hidden_word(word):
 def take_guess():
     """
     Takes a validated guess input from the user.
-    
+
     Returns:
         str: The player's validated guess (a single uppercase letter).
     """
@@ -408,10 +413,11 @@ def update_game_display(hidden_word, missed_letters,
     the visual representation of the game display accordingly.
     It prints the hangman image, hidden word, missed letters,
     and other relevant information.
-    
+
     Args:
         hidden_word (str): The current state of the word being guessed.
-        missed_letters (list): List of letters that have been guessed and were incorrect.
+        missed_letters (list): List of letters that have been guessed
+        and were incorrect.
         category_name (str): The name of the medical word category.
         hangman_stage (int): The current stage of the hangman illustration.
     """
