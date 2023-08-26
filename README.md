@@ -414,7 +414,7 @@ Please refer to [TESTING.md](TESTING.md) file for a comprehensive overview of al
 | **BUG** | **DESCRIBE THE BUG**  | **HOW I SOLVED**|
 | ------- | ------- | ------- |
 | Incorrect interpretation of spaces between words | The bug involved an incorrect interpretation of spaces between words in the create_hidden_word function, resulting in an unbroken string of underscores | The bug was resolved by adopting a new approach in the create_hidden_word function. This revised method utilizes the join function and a list comprehension to individually process each character of the word. This approach accurately manages spaces between words. When a character is not a space, an underscore is inserted; when a character is a space, it remains unchanged as a space. Consequently, this updated strategy ensures accurate handling of spaces between words, enabling the proper separation of words with spaces or representation by underscores as required |
-| Terminal Display Accumulates Blank Lines When Switching Screens | When switching between screens in the Python hangman game, a new blank line was being added with each screen change, resulting in the accumulation of empty lines and increasing the terminal's size | The issue was resolved by replacing the existing clear_terminal() to os.system('cls' if os.name == 'nt' else "printf '\033c'"). This prevented the accumulation of blank lines, ensuring effective terminal screen clearing. |
+| Terminal Display Accumulates Blank Lines with Overlapping of the First Row of ASCII Art Illustrations When Switching Screens | When transitioning between different screens in the Python hangman game, an unintended behavior occurred where a new blank line was being added with each screen change. This led to the accumulation of empty lines over time, causing an increase in the terminal's size. | To address this issue, the problem was resolved by replacing the previous method clear_terminal() with the command `os.system('cls' if os.name == 'nt' else "printf '\033c'"). This change prevented the accumulation of blank lines and ensured efficient clearing of the terminal screen during screen transitions. Additionally, the formatting of the ASCII art illustrations at the beginning of the screens was reconfigured to avoid any overlap or misalignment. These adjustments collectively ensured a seamless and visually pleasing experience during gameplay by maintaining a clean terminal display and eliminating unnecessary blank lines. |
 
 [Back to Contents](#contents)
 
@@ -501,22 +501,23 @@ To clone the repository:
 
 ### Code
 
-- [README.md template from Code Institute](https://github.com/Code-Institute-Solutions/readme-template)
-- [README.md examples from kera-cudmore](https://github.com/kera-cudmore/readme-examples/tree/main)
+- [Code Institute Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) - This template marked the initial phase of commencing my third portfolio project for Code Institute, employing essential Python skills.
+- [README.md examples from kera-cudmore](https://github.com/kera-cudmore/readme-examples/tree/main) - I want to convey my appreciation to Kera Cudmore for providing the foundational structure of a README file.
 
 ### Content
 
 - Content for the website was written by Izabella Lopes.
+- [P3-Hangman-Python-Terminal-Game from Paul Young](https://github.com/paulio11/P3-Hangman-Python-Terminal-Game) - When I was preparing to begin my medical-themed Hangman game, I had a strong desire to utilize the Google Sheets API to enhance my understanding of Python concepts. I want to express my sincere gratitude to Paul Young, the developer behind the code, as their work served as a valuable guide for my project, particularly in relation to implementing Google Sheets integration and managing highscores.
+- [Clear terminal in Python](https://stackoverflow.com/questions/2084508/clear-terminal-in-python) - This website assisted me in efficiently clearing the interpreter console.
 
 ### Media
 
-
-
+- I individually crafted the images for this Python essentials project using an ASCII art generator called [patorjk.com](https://patorjk.com/software/taag/#p=display&f=Stick%20Letters&t=WELCOME%20TO%0AMEDICAL%20HANGMAN!), which is detailed in the imagery section.
 
 ## Acknowledgments
 
 I would like to express my gratitude to the following individuals who played significant roles in the successful completion of my third project:
 
-- My family, for their unwavering support and understanding during this period of intensive study.
-- I extend my heartfelt gratitude to my fellow Code Institute peers from the April 2023 cohort for their priceless contributions in testing for bugs.
+- I am grateful to my family for their consistent support and understanding throughout this period of intense studying.
+- I want to express my sincere thanks to my fellow peers from the April 2023 cohort at Code Institute. Their invaluable contributions in bug testing are deeply appreciated.
 - Jubril Akolade, my mentor from the Code Institute.
