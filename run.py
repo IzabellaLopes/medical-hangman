@@ -347,6 +347,9 @@ def create_hidden_word(word):
 def take_guess():
     """
     Takes a validated guess input from the user.
+    
+    Returns:
+        str: The player's validated guess (a single uppercase letter).
     """
     while True:
         guess = input(f"{BOLD_BLUE}\nTAKE A GUESS: {RESET}").upper()
@@ -405,6 +408,12 @@ def update_game_display(hidden_word, missed_letters,
     the visual representation of the game display accordingly.
     It prints the hangman image, hidden word, missed letters,
     and other relevant information.
+    
+    Args:
+        hidden_word (str): The current state of the word being guessed.
+        missed_letters (list): List of letters that have been guessed and were incorrect.
+        category_name (str): The name of the medical word category.
+        hangman_stage (int): The current stage of the hangman illustration.
     """
     clear_terminal()
 
